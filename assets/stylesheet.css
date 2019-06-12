@@ -1,0 +1,12 @@
+P, summary {
+color:#343a40;
+
+}
+.navbar-light .navbar-nav .nav-link{
+color: rgba(0,0,0,0.5)
+}
+
+#title{
+text-align:center;
+margin: 0.5%
+}
