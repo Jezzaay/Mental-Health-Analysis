@@ -82,21 +82,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/younger_people.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+            <state relative-caret-position="73">
+              <caret line="433" column="45" lean-forward="true" selection-start-line="433" selection-start-column="45" selection-end-line="433" selection-end-column="45" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/children &amp; Younger people/indicators-CountyUA.data north east young people.csv">
+          <provider editor-type-id="csv-table-editor">
+            <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+          </provider>
           <provider selected="true" editor-type-id="csv-text-editor">
             <state relative-caret-position="51">
               <caret line="3" column="7" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
             </state>
-          </provider>
-          <provider editor-type-id="csv-table-editor">
-            <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
           </provider>
         </entry>
       </file>
@@ -176,7 +176,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="890" />
-    <option name="y" value="292" />
+    <option name="y" value="291" />
     <option name="width" value="2715" />
     <option name="height" value="1710" />
   </component>
@@ -186,6 +186,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -214,7 +215,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -331,23 +331,30 @@
       <option name="project" value="LOCAL" />
       <updated>1560615353239</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Updated plot in East Mid &#10;&#10;May use this type of plot, with Year vs Amount of Reported.">
+      <created>1560616443397</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1560616443397</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="712" y="234" width="2172" height="1368" extended-state="0" />
+    <frame x="712" y="233" width="2172" height="1368" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.21401516" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.2159091" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" weight="0.32809916" />
-      <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.500947" side_tool="true" visible="true" weight="0.28842977" />
+      <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.50142044" side_tool="true" visible="true" weight="0.28842977" />
       <window_info anchor="bottom" id="Python Console" order="2" weight="0.32975206" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
       <window_info anchor="bottom" id="Version Control" order="5" weight="0.32975206" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" sideWeight="0.49905303" visible="true" weight="0.28842977" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" sideWeight="0.49857953" visible="true" weight="0.28842977" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.39917356" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -411,7 +418,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changed a few things with the tables. Failed to get plots working as wanted." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed a few things with the tables. Failed to get plots working as wanted." />
+    <MESSAGE value="Updated plot in East Mid &#10;&#10;May use this type of plot, with Year vs Amount of Reported." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated plot in East Mid &#10;&#10;May use this type of plot, with Year vs Amount of Reported." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/main.py">
@@ -425,163 +433,163 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/suicides/indicators-CountyUA.data east of england.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state>
           <caret column="231" selection-start-column="231" selection-end-column="231" />
         </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/suicides/indicators-CountyUA.data north west.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state>
           <caret column="231" selection-start-column="231" selection-end-column="231" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/suicides/indicators-CountyUA.data yorkshire.csv">
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/suicides/indicators-CountyUA.data yorkshire.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="214" lean-forward="true" selection-start-line="3" selection-start-column="214" selection-end-line="3" selection-end-column="214" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/suicides/indicators-CountyUA.data west midlands.csv">
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/suicides/indicators-CountyUA.data west midlands.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
         <state>
           <caret column="231" selection-start-column="231" selection-end-column="231" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/suicides/indicators-CountyUA.data south west.csv">
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/suicides/indicators-CountyUA.data south west.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="110" lean-forward="true" selection-start-line="7" selection-start-column="110" selection-end-line="7" selection-end-column="110" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/suicides/indicators-CountyUA.data south east.csv">
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/suicides/indicators-CountyUA.data south east.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
         <state>
           <caret column="231" selection-start-column="231" selection-end-column="231" />
         </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/suicides/indicators-CountyUA.data north east.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state>
           <caret column="231" selection-start-column="231" selection-end-column="231" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/suicides/indicators-CountyUA.data east midlands.csv">
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/suicides/indicators-CountyUA.data east midlands.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
         <state>
           <caret column="44" lean-forward="true" selection-end-line="1" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/children &amp; Younger people/indicators-CountyUA.data east mid.csv">
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/children &amp; Younger people/indicators-CountyUA.data east mid.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="17">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/children &amp; Younger people/indicators-CountyUA.data east of england.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="17">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/children &amp; Younger people/indicators-CountyUA.data north west.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="17">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/children &amp; Younger people/indicators-CountyUA.data south west.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="17">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/children &amp; Younger people/indicators-CountyUA.data southeast.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="17">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/children &amp; Younger people/indicators-CountyUA.data west midlands.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="17">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/children &amp; Younger people/indicators-CountyUA.data yorkshire &amp;.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="17">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/suicides/indicators-CountyUA.data london.csv">
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/suicides/indicators-CountyUA.data london.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="208" selection-start-line="11" selection-start-column="208" selection-end-line="11" selection-end-column="208" />
         </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/venv/Lib/site-packages/pandas/core/ops.py">
@@ -645,6 +653,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/data/children &amp; Younger people/indicators-CountyUA.data north east young people.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="7" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/data/children &amp; Younger people/indicators-CountyUA.data london young people.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="833">
@@ -652,20 +670,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/children &amp; Younger people/indicators-CountyUA.data north east young people.csv">
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="7" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
-        </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/younger_people.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+        <state relative-caret-position="73">
+          <caret line="433" column="45" lean-forward="true" selection-start-line="433" selection-start-column="45" selection-end-line="433" selection-end-column="45" />
         </state>
       </provider>
     </entry>

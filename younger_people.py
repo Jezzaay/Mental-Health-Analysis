@@ -64,8 +64,8 @@ all_data = all_data[all_data.AreaName != "England"]
 
 london= london[london.AreaName  != "England"]
 
-london_data = london.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
-london_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
+london_data = london.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
+london_data.columns = ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
 #East Mid
 east_mid = east_mid[east_mid != "England"]
 east_mid_data = east_mid.groupby(["Timeperiod"]).size().reset_index()
@@ -252,7 +252,6 @@ html.Div([ ]),
             }
         ),
 
-
         html.Br(),
 
 
@@ -276,6 +275,7 @@ html.Div([ ]),
                 'rule': 'display: inline; white-space: inherit; overflow: inherit; text-overflow: inherit;'
             }],
         ),
+        html.Div(id="london_container")
     ]),
 
     html.Details([
@@ -425,10 +425,48 @@ html.Div([ ]),
 ])
 
 
+@app.callback(
+    Output('london_container', 'children'),
+    [Input('london_table', 'derived_virtual_data'),
+     Input('london_table', 'derived_virtual_selected_rows')])
 
+def update_graphs(rows, derived_virtual_selected_rows):
+    if derived_virtual_selected_rows is None:
+        derived_virtual_selected_rows = []
 
-@app.callback(Output('younger_content', 'children'),
-        [Input('young', 'value')])
+    dff = london_data if rows is None else pd.DataFrame(rows)
 
-def display_value(value):
-        return 'You have selected "{}"'.format(value)
+    colors = ['#7FDBFF' if i in derived_virtual_selected_rows else '#0074D9'
+              for i in range(len(dff))]
+
+    return [
+        dcc.Graph(
+            id=column,
+            figure={
+                "data": [
+                    {
+                        "x": london_data["AreaName"],
+                        "y": london_data[column],
+                        'text': london_data.IndicatorFigures ,
+                        "type": "bar",
+                        "marker": {"color": colors},
+                    }
+                ],
+                "layout": {
+                    "xaxis": {"automargin": True},
+                    "yaxis": {
+                        "automargin": True,
+                        "title": {"text": column   }
+                    },
+                    'font-size': "2vw",
+                    'hovermode' : 'closest',
+                    "height": 250,
+                    "margin": {"t": 10, "l": 10, "r": 10},
+                },
+            },
+        )
+        # check if column exists - user may have deleted it
+        # If `column.deletable=False`, then you don't
+        # need to do this check.
+        for column in ["Year", "IndicatorName", "IndicatorFigures"] if column in dff
+    ]
