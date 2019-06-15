@@ -1,3 +1,4 @@
+import pprint
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -7,11 +8,12 @@ import pandas as pd
 import numpy as np
 import scipy
 import matplotlib.pyplot as plt
-import seaborn
+import seaborn as sns
 import plotly
 from dash.dependencies import Input, Output
 from collections import Counter
 import plotly.graph_objs as go
+import plotly.tools as tls
 
 from app import  app
 #import csv
@@ -58,16 +60,44 @@ data_join = [london, east_mid, east_england, north_east, north_west,
 all_data =  pd.concat(data_join)
 all_data = all_data[all_data.AreaName != "England"]
 
+#London Data
 
+london= london[london.AreaName  != "England"]
 
-# get rid of test name.
-test = all_data.groupby(["IndicatorName", "AreaName"]).size().reset_index()
-
-
-type(test)
-test.columns = ["IndicatorName", "AreaName","IndicatorPerArea"]
-
-print(test)
+london_data = london.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
+london_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
+#East Mid
+east_mid = east_mid[east_mid != "England"]
+east_mid_data = east_mid.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
+east_mid_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
+#East England
+east_england = east_england[east_england!= "England"]
+east_england_data = east_england.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
+east_england_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
+#North East
+north_east = north_east[north_east!= "England"]
+ne_data = north_east.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
+ne_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
+#North West
+north_west = north_west[north_west!= "England"]
+nw_data = north_west.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
+nw_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
+#South West
+south_west = south_west[south_east!= "England"]
+sw_data = south_west.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
+sw_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
+#South East
+south_east = south_east[south_east!= "England"]
+se_data = south_east.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
+se_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
+#West Mid
+west_midlands = west_midlands[west_midlands!= "England"]
+west_mid_data = west_midlands.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
+west_mid_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
+#Yorkshire
+yorkshire = yorkshire[yorkshire!= "England"]
+yorkshire_data = yorkshire.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
+yorkshire_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
 
 
 
@@ -75,24 +105,8 @@ younger_people_layout = html.Div([
     html.H1('Children & Younger People Analysis', id="title"),
 
 
-#make this stacled
-     dcc.Graph(
-            figure = go.Figure(
-                data=[
-                    go.Bar(
-                        x=test["IndicatorName"],
-                        y=test["IndicatorPerArea"],
-                text = test.IndicatorPerArea,
-                textposition='auto'
-                        #name=test["AreaName"]
-                    )
 
-                ],
-                layout=go.Layout(
-                 title="test",
-                )
-            )
-        ),
+
 
     html.Details([
         html.Summary("United Kingdom Data"),
@@ -101,9 +115,7 @@ younger_people_layout = html.Div([
 
         html.Div([
 
-            dcc.Graph(
-                id="all_data_graph",
-                figure={
+            dcc.Graph( id="all_data_graph",figure={
                     'data': [
 
                         go.Scatter(
@@ -167,10 +179,7 @@ younger_people_layout = html.Div([
         html.Summary("East Midlands Details"),
         html.Br(),
 
-html.Div([
-
-
-        ]),
+html.Div([ ]),
         html.Br(),
 
         dash_table.DataTable(
@@ -218,12 +227,30 @@ html.Div([
 
     html.Details([
         html.Summary("London Details"),
+
+
+                  dcc.Graph(
+            id='london_graph',
+            figure={
+                'data': [
+                    {'x': london_data["Year"],
+                     'y': london_data["IndicatorFigures"], 'type': 'bar',
+                     'text':  london_data["IndicatorName"]}
+                ],
+                'layout': dict(title='London Younger People Data', showLegend=True, barmode="stack")
+            }
+        ),
+
+
         html.Br(),
+
+
+
         dash_table.DataTable(
             id="london_table",
 
-            columns=[{'id': c, 'name': c} for c in london.columns],
-            data=london.to_dict('records'),
+            columns=[{'id': c, 'name': c} for c in london_data.columns],
+            data=london_data.to_dict('records'),
             filtering=True,
             sorting=True,
             sorting_type="multi",
@@ -247,8 +274,8 @@ html.Div([
         dash_table.DataTable(
             id="north_east_table",
 
-            columns=[{'id': c, 'name': c} for c in north_east.columns],
-            data=north_east.to_dict('records'),
+            columns=[{'id': c, 'name': c} for c in ne_data.columns],
+            data=ne_data.to_dict('records'),
             filtering=True,
             sorting=True,
             sorting_type="multi",
@@ -271,8 +298,8 @@ html.Div([
         dash_table.DataTable(
             id="north_west_table",
 
-            columns=[{'id': c, 'name': c} for c in north_west.columns],
-            data=north_west.to_dict('records'),
+            columns=[{'id': c, 'name': c} for c in nw_data.columns],
+            data=nw_data.to_dict('records'),
             filtering=True,
             sorting=True,
             sorting_type="multi",
@@ -294,8 +321,8 @@ html.Div([
         html.Br(),
         dash_table.DataTable(
             id="south_east_table",
-            columns=[{'id': c, 'name': c} for c in south_east.columns],
-            data=south_east.to_dict('records'),
+            columns=[{'id': c, 'name': c} for c in se_data.columns],
+            data=se_data.to_dict('records'),
             filtering=True,
             sorting=True,
             sorting_type="multi",
@@ -318,8 +345,8 @@ html.Div([
         html.Br(),
         dash_table.DataTable(
             id="south_west_table",
-            columns=[{'id': c, 'name': c} for c in south_west.columns],
-            data=south_west.to_dict('records'),
+            columns=[{'id': c, 'name': c} for c in sw_data.columns],
+            data=sw_data.to_dict('records'),
             filtering=True,
             sorting=True,
             sorting_type="multi",
@@ -341,8 +368,8 @@ html.Div([
         html.Br(),
         dash_table.DataTable(
             id="west_midlands_table",
-            columns=[{'id': c, 'name': c} for c in west_midlands.columns],
-            data=west_midlands.to_dict('records'),
+            columns=[{'id': c, 'name': c} for c in west_mid_data.columns],
+            data=west_mid_data.to_dict('records'),
             filtering=True,
             sorting=True,
             sorting_type="multi",
@@ -359,7 +386,30 @@ html.Div([
         ),
     ]),
 
-        html.Div(id='younger_content'),
+    html.Details([
+        html.Summary("Yorkshire Details"),
+        html.Br(),
+        dash_table.DataTable(
+            id="west_midlands_table",
+            columns=[{'id': c, 'name': c} for c in yorkshire_data.columns],
+            data=yorkshire_data.to_dict('records'),
+            filtering=True,
+            sorting=True,
+            sorting_type="multi",
+            style_table={'overflowX': 'scroll'},
+            style_cell={
+                # all three widths are needed
+                'minWidth': '180px', 'width': '180px', 'maxWidth': '180px',
+                'whiteSpace': 'normal'
+            },
+            css=[{
+                'selector': '.dash-cell div.dash-cell-value',
+                'rule': 'display: inline; white-space: inherit; overflow: inherit; text-overflow: inherit;'
+            }],
+        ),
+    ]),
+
+    html.Div(id='younger_content'),
 
 ])
 
