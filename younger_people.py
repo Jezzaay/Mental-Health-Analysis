@@ -68,8 +68,8 @@ london_data = london.groupby(["IndicatorName", "Timeperiod"]).size().reset_index
 london_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
 #East Mid
 east_mid = east_mid[east_mid != "England"]
-east_mid_data = east_mid.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
-east_mid_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
+east_mid_data = east_mid.groupby(["Timeperiod"]).size().reset_index()
+east_mid_data.columns = ["Year", "IndicatorFigures"]
 #East England
 east_england = east_england[east_england!= "England"]
 east_england_data = east_england.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
@@ -182,10 +182,21 @@ younger_people_layout = html.Div([
 html.Div([ ]),
         html.Br(),
 
+        dcc.Graph(id="east_mid",
+                  figure ={
+                      'data': [
+                          {'x': east_mid_data["Year"], 'y': east_mid_data["IndicatorFigures"], 'type' :'bar'}
+                      ],
+                      'layout' :{
+                          'title': "East Mid Young People data"
+                      }
+                  }
+                  ),
+
         dash_table.DataTable(
             id="east_midlands_table",
-            columns=[{'id': c, 'name': c} for c in east_mid.columns],
-            data=east_mid.to_dict('records'),
+            columns=[{'id': c, 'name': c} for c in east_mid_data.columns],
+            data=east_mid_data.to_dict('records'),
             filtering=True,
             sorting=True,
             sorting_type="multi",
@@ -207,8 +218,8 @@ html.Div([ ]),
         html.Br(),
         dash_table.DataTable(
             id="east_england_table",
-            columns=[{'id': c, 'name': c} for c in east_england.columns],
-            data=east_england.to_dict('records'),
+            columns=[{'id': c, 'name': c} for c in east_england_data.columns],
+            data=east_england_data.to_dict('records'),
             filtering=True,
             sorting=True,
             sorting_type="multi",

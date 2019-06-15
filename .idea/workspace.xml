@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd2bea3b-3927-414f-aa6c-9550e35079b6" name="Default Changelist" comment="Update Plot, subplot for London data will improve to all further on.&#10;Will also expand it to other regions later and put into the Dash to show">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="dd2bea3b-3927-414f-aa6c-9550e35079b6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/younger_people.py" beforeDir="false" afterPath="$PROJECT_DIR$/younger_people.py" afterDir="false" />
     </list>
@@ -83,11 +82,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/younger_people.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="99" column="70" lean-forward="true" selection-start-line="99" selection-start-column="70" selection-end-line="99" selection-end-column="70" />
-              <folding>
-                <element signature="e#0#6#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="173">
+              <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
             </state>
           </provider>
         </entry>
@@ -179,8 +175,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="907" />
-    <option name="y" value="385" />
+    <option name="x" value="890" />
+    <option name="y" value="292" />
     <option name="width" value="2715" />
     <option name="height" value="1710" />
   </component>
@@ -328,22 +324,30 @@
       <option name="presentableId" value="Default" />
       <updated>1559813172223</updated>
     </task>
+    <task id="LOCAL-00001" summary="Changed a few things with the tables. Failed to get plots working as wanted.">
+      <created>1560615353238</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1560615353239</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="726" y="308" width="2172" height="1368" extended-state="0" />
+    <frame x="712" y="234" width="2172" height="1368" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.21212122" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.21401516" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" weight="0.32809916" />
-      <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.500947" side_tool="true" visible="true" weight="0.28842977" />
       <window_info anchor="bottom" id="Python Console" order="2" weight="0.32975206" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
       <window_info anchor="bottom" id="Version Control" order="5" weight="0.32975206" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.28842977" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" sideWeight="0.49905303" visible="true" weight="0.28842977" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.39917356" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -404,6 +408,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Changed a few things with the tables. Failed to get plots working as wanted." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed a few things with the tables. Failed to get plots working as wanted." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/main.py">
@@ -576,6 +584,13 @@
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/venv/Lib/site-packages/pandas/core/ops.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="1648" selection-start-line="1648" selection-end-line="1648" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -620,30 +635,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/children &amp; Younger people/indicators-CountyUA.data north east young people.csv">
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="7" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
-        </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/children &amp; Younger people/indicators-CountyUA.data london young people.csv">
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="833">
-          <caret line="49" column="147" selection-start-line="49" selection-start-column="141" selection-end-line="49" selection-end-column="147" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/venv/Lib/site-packages/pandas/core/ops.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="1648" selection-start-line="1648" selection-end-line="1648" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/suicides.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
@@ -654,13 +645,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/data/children &amp; Younger people/indicators-CountyUA.data london young people.csv">
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="833">
+          <caret line="49" column="147" selection-start-line="49" selection-start-column="141" selection-end-line="49" selection-end-column="147" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/children &amp; Younger people/indicators-CountyUA.data north east young people.csv">
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="7" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+        </state>
+      </provider>
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/younger_people.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="99" column="70" lean-forward="true" selection-start-line="99" selection-start-column="70" selection-end-line="99" selection-end-column="70" />
-          <folding>
-            <element signature="e#0#6#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="173">
+          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
         </state>
       </provider>
     </entry>
