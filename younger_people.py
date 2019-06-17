@@ -68,45 +68,48 @@ london_data = london.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size()
 london_data.columns = ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
 #East Mid
 east_mid = east_mid[east_mid != "England"]
-east_mid_data = east_mid.groupby(["Timeperiod"]).size().reset_index()
-east_mid_data.columns = ["Year", "IndicatorFigures"]
+east_mid_data = east_mid.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
+east_mid_data.columns = ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
 #East England
 east_england = east_england[east_england!= "England"]
-east_england_data = east_england.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
-east_england_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
+east_england_data = east_england.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
+east_england_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
 #North East
 north_east = north_east[north_east!= "England"]
-ne_data = north_east.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
-ne_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
+ne_data = north_east.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
+ne_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
 #North West
 north_west = north_west[north_west!= "England"]
-nw_data = north_west.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
-nw_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
+nw_data = north_west.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
+nw_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
 #South West
 south_west = south_west[south_east!= "England"]
-sw_data = south_west.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
-sw_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
+sw_data = south_west.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
+sw_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
 #South East
 south_east = south_east[south_east!= "England"]
-se_data = south_east.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
-se_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
+se_data = south_east.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
+se_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
 #West Mid
 west_midlands = west_midlands[west_midlands!= "England"]
-west_mid_data = west_midlands.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
-west_mid_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
+west_mid_data = west_midlands.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
+west_mid_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
 #Yorkshire
 yorkshire = yorkshire[yorkshire!= "England"]
-yorkshire_data = yorkshire.groupby(["IndicatorName", "Timeperiod"]).size().reset_index()
-yorkshire_data.columns = ["IndicatorName", "Year", "IndicatorFigures"]
+yorkshire_data = yorkshire.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
+yorkshire_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
 
 
 
 younger_people_layout = html.Div([
     html.H1('Children & Younger People Analysis', id="title"),
-
-
-
-
+    html.P("Hover over the area names for the cells indicator name, as many places in the dataset have 1's for each "
+           "indicator it may have repetitions for the area name in the cells but they are for different indicators. "
+           "Hovering also displays the indicator value. "
+           "The graphs are Year and Indicator Figures in a bar chart. Although the bar may seem to be high but that is "
+           "every reported case for that year within the dataset"),
+    html.P("London has the largest of this data. To read London area names zooming in is required."
+           "Each graph is scaled so the text is clearly visible. However, there are tools, to zoom in or out.   "),
 
     html.Details([
         html.Summary("United Kingdom Data"),
@@ -157,7 +160,11 @@ younger_people_layout = html.Div([
             data=all_data.to_dict('records'),
             filtering=True,
             sorting=True,
-            sorting_type="multi",
+            sorting_type="single",
+            pagination_settings={
+                "current_page": 0,
+                "page_size": 5,
+            },
             style_table={'overflowX': 'scroll'},
             style_cell={
                 # all three widths are needed
@@ -180,18 +187,10 @@ younger_people_layout = html.Div([
         html.Br(),
 
 html.Div([ ]),
+        html.H1("East Midlands Data"),
+        html.P("This includes areas such as Derby, Nottingham, Rutland"),
         html.Br(),
 
-        dcc.Graph(id="east_mid",
-                  figure ={
-                      'data': [
-                          {'x': east_mid_data["Year"], 'y': east_mid_data["IndicatorFigures"], 'type' :'bar'}
-                      ],
-                      'layout' :{
-                          'title': "East Mid Young People data"
-                      }
-                  }
-                  ),
 
         dash_table.DataTable(
             id="east_midlands_table",
@@ -199,7 +198,11 @@ html.Div([ ]),
             data=east_mid_data.to_dict('records'),
             filtering=True,
             sorting=True,
-            sorting_type="multi",
+            sorting_type="single",
+            pagination_settings={
+                "current_page":0,
+                "page_size": 5,
+            },
             style_table={'overflowX': 'scroll'},
             style_cell={
                 # all three widths are needed
@@ -211,10 +214,40 @@ html.Div([ ]),
                 'rule': 'display: inline; white-space: inherit; overflow: inherit; text-overflow: inherit;'
             }],
         ),
+
+        dcc.Graph(
+            id='east_mid_graph',
+            figure={
+                'data': [
+                    {'x': east_mid_data["Year"],
+                     'y': east_mid_data["IndicatorFigures"], 'type': 'bar',
+                     'text': east_mid_data["AreaName"],
+                     'textposition': "inside",
+                     'hovertext': east_mid_data["IndicatorName"],
+                     'opacity': 0.8,
+                     'marker': dict(color="rgb(255,165,0)"
+                                              ),
+                     }
+                ],
+                'layout': dict(title='East Midlands Younger People Data', showLegend=True, barmode="stack",
+                               xaxis={'title': "Years"},
+                               yaxis={'title': "Indicator Figures (Total Figures for Year)"},
+                               height=1200,
+                               hovermode="closest",
+                               autosize=True)
+            }
+        ),
+
+        html.Br(),
+
     ]),
 
     html.Details([
         html.Summary("East of England Details"),
+        html.H1("East of England Data"),
+         html.P("This includes areas such as Luton, Bedford, Essex, Cambridgeshire"),
+
+
         html.Br(),
         dash_table.DataTable(
             id="east_england_table",
@@ -222,7 +255,11 @@ html.Div([ ]),
             data=east_england_data.to_dict('records'),
             filtering=True,
             sorting=True,
-            sorting_type="multi",
+            sorting_type="single",
+            pagination_settings={
+                "current_page": 0,
+                "page_size": 5,
+            },
             style_table={'overflowX': 'scroll'},
             style_cell={
                 # all three widths are needed
@@ -234,23 +271,36 @@ html.Div([ ]),
                 'rule': 'display: inline; white-space: inherit; overflow: inherit; text-overflow: inherit;'
             }],
         ),
+        dcc.Graph(
+            id='east_england_graph',
+            figure={
+                'data': [
+                    {'x': east_england_data["Year"],
+                     'y': east_england_data["IndicatorFigures"], 'type': 'bar',
+                     'text': east_england_data["AreaName"],
+                     'textposition': "inside",
+                     'hovertext': east_england_data["IndicatorName"],
+                     'opacity': 0.8,
+                     'marker': dict(color="rgb(255,165,0)"),
+                     }
+                ],
+                'layout': dict(title='East of England Younger People Data', showLegend=True, barmode="group",
+                               xaxis={'title': "Years"},
+                               yaxis={'title': "Indicator Figures (Total Figures for Year)"},
+                               height=1500,
+                               hovermode="closest",
+                               autosize=True)
+            }
+        ),
+
     ]),
 
     html.Details([
         html.Summary("London Details"),
+        html.H1("London Data"),
+                html.P("This includes areas such as Brent, Camden, Enfield"),
 
 
-                  dcc.Graph(
-            id='london_graph',
-            figure={
-                'data': [
-                    {'x': london_data["Year"],
-                     'y': london_data["IndicatorFigures"], 'type': 'bar',
-                     'text':  london_data["IndicatorName"]}
-                ],
-                'layout': dict(title='London Younger People Data', showLegend=True, barmode="stack")
-            }
-        ),
 
         html.Br(),
 
@@ -263,7 +313,12 @@ html.Div([ ]),
             data=london_data.to_dict('records'),
             filtering=True,
             sorting=True,
-            sorting_type="multi",
+            sorting_type="single",
+            pagination_mode="fe",
+            pagination_settings={
+                "current_page":0,
+                "page_size": 5,
+            },
             style_table={'overflowX': 'scroll'},
             style_cell={
                 # all three widths are needed
@@ -275,11 +330,37 @@ html.Div([ ]),
                 'rule': 'display: inline; white-space: inherit; overflow: inherit; text-overflow: inherit;'
             }],
         ),
+
+        dcc.Graph(
+            id='london_graph',
+            figure={
+                'data': [
+                    {'x': london_data["Year"],
+                     'y': london_data["IndicatorFigures"], 'type': 'bar',
+                     'text': london_data["AreaName"],
+                     'textposition': "inside",
+                     'hovertext': london_data["IndicatorName"],
+                     'opacity': 0.8,
+                     'marker': dict(color="rgb(255,165,0)"),
+                     }
+                ],
+                'layout': dict(title='London Younger People Data', showLegend=True,
+                               xaxis={'title': "Years"},
+                               yaxis={'title': "Indicator Figures (Total Figures for Year)", 'dtick': 100},
+                               height=2500,
+                               hovermode="closest",
+                               autosize=True)
+            }
+        ),
+
         html.Div(id="london_container")
     ]),
 
     html.Details([
         html.Summary("North East Details"),
+        html.H1("North East Data"),
+                html.P("This includes areas such as Sunderland, Gateshead, Middlesbrough"),
+
         html.Br(),
 
         dash_table.DataTable(
@@ -289,7 +370,11 @@ html.Div([ ]),
             data=ne_data.to_dict('records'),
             filtering=True,
             sorting=True,
-            sorting_type="multi",
+            sorting_type="single",
+            pagination_settings={
+                "current_page": 0,
+                "page_size": 5,
+            },
             style_table={'overflowX': 'scroll'},
             style_cell={
                 # all three widths are needed
@@ -301,10 +386,35 @@ html.Div([ ]),
                 'rule': 'display: inline; white-space: inherit; overflow: inherit; text-overflow: inherit;'
             }],
         ),
+        dcc.Graph(
+            id='ne_graph',
+            figure={
+                'data': [
+                    {'x': ne_data["Year"],
+                     'y': ne_data["IndicatorFigures"], 'type': 'bar',
+                     'text': ne_data["AreaName"],
+                     'textposition': "inside",
+                     'hovertext': ne_data["IndicatorName"],
+                     'opacity': 0.8,
+                     'marker': dict(color="rgb(255,165,0)"),
+                     }
+                ],
+                'layout': dict(title='North East England Younger People Data', showLegend=True,
+                               xaxis={'title': "Years"},
+                               yaxis={'title': "Indicator Figures (Total Figures for Year)"},
+                               hovermode="closest",
+                               height=1500,
+                               autosize=True)
+            }
+        ),
+
     ]),
 
     html.Details([
         html.Summary("North West Details"),
+        html.H1("North West Data"),
+                html.P("This includes areas such as Blackpool, Liverpool, Manchester"),
+
         html.Br(),
         dash_table.DataTable(
             id="north_west_table",
@@ -313,7 +423,11 @@ html.Div([ ]),
             data=nw_data.to_dict('records'),
             filtering=True,
             sorting=True,
-            sorting_type="multi",
+            sorting_type="single",
+            pagination_settings={
+                "current_page": 0,
+                "page_size": 5,
+            },
             style_table={'overflowX': 'scroll'},
             style_cell={
                 # all three widths are needed
@@ -325,10 +439,35 @@ html.Div([ ]),
                 'rule': 'display: inline; white-space: inherit; overflow: inherit; text-overflow: inherit;'
             }],
         ),
+        dcc.Graph(
+            id='nw_graph',
+            figure={
+                'data': [
+                    {'x': nw_data["Year"],
+                     'y': nw_data["IndicatorFigures"], 'type': 'bar',
+                     'text': nw_data["AreaName"],
+                     'textposition': "inside",
+                     'hovertext': nw_data["IndicatorName"],
+                     'opacity': 0.8,
+                     'marker': dict(color="rgb(255,165,0)"),
+                     }
+                ],
+                'layout': dict(title='North West England Younger People Data', showLegend=True,
+                               xaxis={'title': "Years"},
+                               yaxis={'title': "Indicator Figures (Total Figures for Year)"},
+                               height=2500,
+                               hovermode="closest",
+                               autosize=True)
+            }
+        ),
+
     ]),
 
     html.Details([
         html.Summary("South East Details"),
+        html.H1("South East Data"),
+                html.P("This includes areas such as Kent, Milton Keynes, Reading"),
+
         html.Br(),
         dash_table.DataTable(
             id="south_east_table",
@@ -336,7 +475,11 @@ html.Div([ ]),
             data=se_data.to_dict('records'),
             filtering=True,
             sorting=True,
-            sorting_type="multi",
+            sorting_type="single",
+            pagination_settings={
+                "current_page": 0,
+                "page_size": 5,
+            },
             style_table={'overflowX': 'scroll'},
             style_cell={
                 # all three widths are needed
@@ -349,10 +492,36 @@ html.Div([ ]),
             }],
 
         ),
+        dcc.Graph(
+            id='se_graph',
+            figure={
+                'data': [
+                    {'x': se_data["Year"],
+                     'y': se_data["IndicatorFigures"], 'type': 'bar',
+                     'text': se_data["AreaName"],
+                     'textposition': "inside",
+                     'hovertext': se_data["IndicatorName"],
+                     'opacity': 0.8,
+                     'marker': dict(color="rgb(255,165,0)"
+                                              ),
+                     }
+                ],
+                'layout': dict(title='South East Younger People Data', showLegend=True,
+                               xaxis={'title': "Years"},
+                               yaxis={'title': "Indicator Figures (Total Figures for Year)"},
+                               height=2500,
+                               hovermode="closest",
+                               autosize=True)
+            }
+        ),
+
     ]),
 
     html.Details([
         html.Summary("South West Details"),
+        html.H1("South West Data"),
+                html.P("This includes areas such as Bournemouth, Swindon, Torbay"),
+
         html.Br(),
         dash_table.DataTable(
             id="south_west_table",
@@ -360,7 +529,11 @@ html.Div([ ]),
             data=sw_data.to_dict('records'),
             filtering=True,
             sorting=True,
-            sorting_type="multi",
+            sorting_type="single",
+            pagination_settings={
+                "current_page": 0,
+                "page_size": 5,
+            },
             style_table={'overflowX': 'scroll'},
             style_cell={
                 # all three widths are needed
@@ -372,10 +545,35 @@ html.Div([ ]),
                 'rule': 'display: inline; white-space: inherit; overflow: inherit; text-overflow: inherit;'
             }],
         ),
+        dcc.Graph(
+            id='south_west_graph',
+            figure={
+                'data': [
+                    {'x': sw_data["Year"],
+                     'y': sw_data["IndicatorFigures"], 'type': 'bar',
+                     'text': sw_data["AreaName"],
+                     'textposition': "inside",
+                     'hovertext': sw_data["IndicatorName"],
+                     'opacity': 0.8,
+                     'marker': dict(color="rgb(255,165,0)"),
+                     }
+                ],
+                'layout': dict(title='South West Younger People Data', showLegend=True,
+                               xaxis={'title': "Years"},
+                               yaxis={'title': "Indicator Figures (Total Figures for Year)"},
+                               height=1500,
+                               hovermode="closest",
+                               autosize=True)
+            }
+        ),
+
     ]),
 
     html.Details([
         html.Summary("West Midlands Details"),
+        html.H1("West Midlands Data"),
+                html.P("This includes areas such as Coventry, Solihull, Wolverhamton"),
+
         html.Br(),
         dash_table.DataTable(
             id="west_midlands_table",
@@ -383,7 +581,11 @@ html.Div([ ]),
             data=west_mid_data.to_dict('records'),
             filtering=True,
             sorting=True,
-            sorting_type="multi",
+            sorting_type="single",
+            pagination_settings={
+                "current_page": 0,
+                "page_size": 5,
+            },
             style_table={'overflowX': 'scroll'},
             style_cell={
                 # all three widths are needed
@@ -395,18 +597,46 @@ html.Div([ ]),
                 'rule': 'display: inline; white-space: inherit; overflow: inherit; text-overflow: inherit;'
             }],
         ),
+
+        dcc.Graph(
+            id='west_mid_graph',
+            figure={
+                'data': [
+                    {'x': west_mid_data["Year"],
+                     'y': west_mid_data["IndicatorFigures"], 'type': 'bar',
+                     'text': west_mid_data["AreaName"],
+                     'textposition': "inside",
+                     'hovertext': west_mid_data["IndicatorName"],
+                     'opacity': 0.8,
+                     'marker': dict(color="rgb(255,165,0)"),
+                     }
+                ],
+                'layout': dict(title='West Midlands Younger People Data', showLegend=True,
+                               xaxis={'title': "Years"},
+                               yaxis={'title': "Indicator Figures (Total Figures for Year)"},
+                               hovermode="closest",
+                               height=1500,
+                               autosize=True)
+            }
+        ),
+
     ]),
 
     html.Details([
-        html.Summary("Yorkshire Details"),
+        html.Summary("Yorkshire & The Humber Details"),
+        html.H1("Yorkshire & The Humber Data"),
         html.Br(),
         dash_table.DataTable(
-            id="west_midlands_table",
+            id="yorkshire_table",
             columns=[{'id': c, 'name': c} for c in yorkshire_data.columns],
             data=yorkshire_data.to_dict('records'),
             filtering=True,
             sorting=True,
-            sorting_type="multi",
+            sorting_type="single",
+            pagination_settings={
+                "current_page": 0,
+                "page_size": 5,
+            },
             style_table={'overflowX': 'scroll'},
             style_cell={
                 # all three widths are needed
@@ -418,55 +648,32 @@ html.Div([ ]),
                 'rule': 'display: inline; white-space: inherit; overflow: inherit; text-overflow: inherit;'
             }],
         ),
+
+        dcc.Graph(
+            id='yorkshire_graph',
+            figure={
+                'data': [
+                    {'x': yorkshire_data["Year"],
+                     'y': yorkshire_data["IndicatorFigures"], 'type': 'bar',
+                     'text': yorkshire_data["AreaName"],
+                     'textposition': "inside",
+                     'hovertext': yorkshire_data["IndicatorName"],
+                     'marker': dict(color="rgb(255,165,0)",
+                                              width=2),
+                     }
+                ],
+                'layout': dict(title='Yorkshire Younger People Data', showLegend=True,
+                               xaxis={'title': "Years"},
+                               yaxis={'title': "Indicator Figures (Total Figures for Year)"},
+                               height=1500,
+                               hovermode="closest",
+                                           autosize=True)
+            }
+        ),
+
     ]),
 
     html.Div(id='younger_content'),
 
 ])
 
-
-@app.callback(
-    Output('london_container', 'children'),
-    [Input('london_table', 'derived_virtual_data'),
-     Input('london_table', 'derived_virtual_selected_rows')])
-
-def update_graphs(rows, derived_virtual_selected_rows):
-    if derived_virtual_selected_rows is None:
-        derived_virtual_selected_rows = []
-
-    dff = london_data if rows is None else pd.DataFrame(rows)
-
-    colors = ['#7FDBFF' if i in derived_virtual_selected_rows else '#0074D9'
-              for i in range(len(dff))]
-
-    return [
-        dcc.Graph(
-            id=column,
-            figure={
-                "data": [
-                    {
-                        "x": london_data["AreaName"],
-                        "y": london_data[column],
-                        'text': london_data.IndicatorFigures ,
-                        "type": "bar",
-                        "marker": {"color": colors},
-                    }
-                ],
-                "layout": {
-                    "xaxis": {"automargin": True},
-                    "yaxis": {
-                        "automargin": True,
-                        "title": {"text": column   }
-                    },
-                    'font-size': "2vw",
-                    'hovermode' : 'closest',
-                    "height": 250,
-                    "margin": {"t": 10, "l": 10, "r": 10},
-                },
-            },
-        )
-        # check if column exists - user may have deleted it
-        # If `column.deletable=False`, then you don't
-        # need to do this check.
-        for column in ["Year", "IndicatorName", "IndicatorFigures"] if column in dff
-    ]

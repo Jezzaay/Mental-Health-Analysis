@@ -10,3 +10,9 @@ color: rgba(0,0,0,0.5)
 text-align:center;
 margin: 0.5%
 }
+
+path.ygrid.crisp{
+stroke:lightblue !important;
+stroke-width: 5px important
+
+}
