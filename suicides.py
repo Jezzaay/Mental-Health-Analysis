@@ -13,7 +13,6 @@ from dash.dependencies import Input, Output
 from app import  app
 
 #import csv
-
 london = pd.read_csv('data/suicides/indicators-CountyUA.data london.csv')
 east_mid = pd.read_csv("data/suicides/indicators-CountyUA.data east midlands.csv")
 east_england = pd.read_csv("data/suicides/indicators-CountyUA.data east of england.csv")
@@ -26,7 +25,7 @@ yorkshire = pd.read_csv("data/suicides/indicators-CountyUA.data yorkshire.csv")
 
 
 #drop Columns
-tables_to_drop = ["IndicatorID", "ParentCode", "ParentName", "AreaCode",  "AreaType",
+tables_to_drop = ["IndicatorID",  "ParentName", "AreaCode",  "AreaType",
                       "Recent_Trend", "Category_Type", "Value_note",
                                                 "Time_period_Sortable", "Category",   "Upper_CI_99.8_limit",
                       "Upper_CI_95.0_limit", "Lower_CI_99.8_limit",

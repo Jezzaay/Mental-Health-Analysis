@@ -10,8 +10,10 @@ color: rgba(0,0,0,0.5)
 text-align:center;
 margin: 0.5%
 }
-
+/* Changing the line stroke thickness and color to blue
+ So it is more visible for the Y value lines. */
 path.ygrid.crisp{
+
 stroke:lightblue !important;
 stroke-width: 5px important
 

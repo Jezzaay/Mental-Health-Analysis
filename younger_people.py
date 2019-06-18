@@ -58,11 +58,16 @@ yorkshire = yorkshire.drop(tables_to_drop, axis = 1)
 data_join = [london, east_mid, east_england, north_east, north_west,
              south_west, south_east, west_midlands, yorkshire]
 
+# Removing England from AreaName and ParentName as unsure where these figures are actually from
+
+# .size().reset_index() allows to count the number of same in the first column e.g. IndicatorName, counts these figures.
 
 #All of England
 all_data =  pd.concat(data_join)
 all_data = all_data[all_data.AreaName != "England"]
 all_data = all_data[all_data.ParentName != "England"]
+
+#England With London
 england = all_data.groupby(["IndicatorName", "Timeperiod", "ParentName"]).size().reset_index()
 england.columns = ["IndicatorName", "Year", "Region", "IndicatorFigures"]
 
