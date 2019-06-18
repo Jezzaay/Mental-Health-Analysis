@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd2bea3b-3927-414f-aa6c-9550e35079b6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/stylesheet.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/home.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/index.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/suicides.py" beforeDir="false" afterPath="$PROJECT_DIR$/suicides.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/younger_people.py" beforeDir="false" afterPath="$PROJECT_DIR$/younger_people.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -87,8 +83,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/younger_people.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="62" column="120" selection-start-line="62" selection-start-column="120" selection-end-line="62" selection-end-column="120" />
+            <state relative-caret-position="516">
+              <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
               <folding>
                 <element signature="e#1#12#0" expanded="true" />
               </folding>
@@ -390,7 +386,14 @@
       <option name="project" value="LOCAL" />
       <updated>1560858472833</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Comments added for future use.">
+      <created>1560859285638</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1560859285638</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -475,7 +478,8 @@
     <MESSAGE value="Plots for all regions of England. Text inside for area names and hover on for indicator/year/figures. &#10;&#10;Updated stroke color/thickness in css." />
     <MESSAGE value="Plot for England All Data. Needs adjusting as london regions taking up majority. Perhaps need to show without these and one with these." />
     <MESSAGE value="Bar plot without London added. &#10;&#10;Plot just showing Regions. Removed some libraries not needed. Added few comments." />
-    <option name="LAST_COMMIT_MESSAGE" value="Bar plot without London added. &#10;&#10;Plot just showing Regions. Removed some libraries not needed. Added few comments." />
+    <MESSAGE value="Comments added for future use." />
+    <option name="LAST_COMMIT_MESSAGE" value="Comments added for future use." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/main.py">
@@ -728,8 +732,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/younger_people.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="62" column="120" selection-start-line="62" selection-start-column="120" selection-end-line="62" selection-end-column="120" />
+        <state relative-caret-position="516">
+          <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
           <folding>
             <element signature="e#1#12#0" expanded="true" />
           </folding>

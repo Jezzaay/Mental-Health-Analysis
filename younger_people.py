@@ -136,10 +136,7 @@ younger_people_layout = html.Div([
 
     html.Details([ # Details allows to hide sections in the page until clicked.
         html.Summary("England Data"),
-        html.P("Two Graphs showing Data for England. One displaying data including London and one without. "
-               "The reason for this is to show the data that London may contain majority of the data. Therefore,"
-               "the data being shown can be more accurate and can give the viewer a better outlook on the data. "),
-        html.Br(),
+
 
 
         html.Br(),
@@ -168,6 +165,11 @@ younger_people_layout = html.Div([
                 'rule': 'display: inline; white-space: inherit; overflow: inherit; text-overflow: inherit;'
             }],
         ),
+
+        html.P("Two Graphs showing Data for England. One displaying data including London and one without. "
+               "The reason for this is to show the data that London may contain majority of the data. Therefore,"
+               "the data being shown can be more accurate and can give the viewer a better outlook on the data. "),
+        html.Br(),
 
         html.Div([
 
