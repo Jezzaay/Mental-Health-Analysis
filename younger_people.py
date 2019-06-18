@@ -33,7 +33,7 @@ pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
 
 #drop Columns
-tables_to_drop = ["IndicatorID", "ParentCode", "ParentName", "AreaCode",  "AreaType",
+tables_to_drop = ["IndicatorID", "ParentCode",  "AreaCode",  "AreaType",
                       "Recent_Trend", "Category_Type", "Value_note",
                                                 "Time_period_Sortable", "Category",   "Upper_CI_99.8_limit",
                       "Upper_CI_95.0_limit", "Lower_CI_99.8_limit",
@@ -59,9 +59,11 @@ data_join = [london, east_mid, east_england, north_east, north_west,
 
 all_data =  pd.concat(data_join)
 all_data = all_data[all_data.AreaName != "England"]
+all_data = all_data[all_data.ParentName != "England"]
+england = all_data.groupby(["IndicatorName", "Timeperiod", "ParentName"]).size().reset_index()
+england.columns = ["IndicatorName", "Year", "Region", "IndicatorFigures"]
 
 #London Data
-
 london= london[london.AreaName  != "England"]
 
 london_data = london.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
@@ -100,7 +102,6 @@ yorkshire_data = yorkshire.groupby(["IndicatorName", "Timeperiod", "AreaName"]).
 yorkshire_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
 
 
-
 younger_people_layout = html.Div([
     html.H1('Children & Younger People Analysis', id="title"),
     html.P("Hover over the area names for the cells indicator name, as many places in the dataset have 1's for each "
@@ -112,41 +113,35 @@ younger_people_layout = html.Div([
            "Each graph is scaled so the text is clearly visible. However, there are tools, to zoom in or out.   "),
 
     html.Details([
-        html.Summary("United Kingdom Data"),
+        html.Summary("England Data"),
 
         html.Br(),
 
         html.Div([
 
-            dcc.Graph( id="all_data_graph",figure={
+            dcc.Graph(
+                id='all_graph',
+                figure={
                     'data': [
-
-                        go.Scatter(
-                            x=all_data[all_data["AreaName"] == i]['Timeperiod'],
-                            y=all_data[all_data["AreaName"] == i ]['IndicatorName'],
-                            #text=all_data[all_data["AreaName"] == i ]["Amount"],
-                            mode='markers',
-                            opacity=0.6,
-                            marker={
-                              'size':10,
-                                'line': {'width' : 0.5, 'color' :'white'},
-
-                            },
-                           name=i,
-                        )
-                        for i in all_data.AreaName.unique()
+                        {'x': england["Year"],
+                         'y': england["IndicatorFigures"], 'type': 'bar',
+                         'text': england["Region"],
+                         'textposition': "inside",
+                         'hovertext': england["IndicatorName"],
+                         'opacity': 0.8,
+                         'marker': dict(color="rgb(255,165,0)"
+                                        ),
+                         }
                     ],
-                    'layout': go.Layout(
-                        xaxis={'title': "Time Period", 'autorange':True},
-                        yaxis={'title': "Age", 'autorange':True},
-                        margin={'l': 40, 'b': 40, 't': 10, 'r': 10},
-                         #legend={'x': 0, 'y': 1},
-                           hovermode='closest',
-                        autosize = True,
-
-                    )
+                    'layout': dict(title='England Younger People Data',  autosize=True, barmode="stack",
+                                   xaxis={'title': "Years"},
+                                   yaxis={'title': "Indicator Figures (Total Figures for Year)",
+                                      'range':[0,1000]    },
+                                   height=1000,
+                                   hovermode="closest"
+                                  )
                 }
-            )
+            ),
 
         ]),
         html.Br(),
@@ -156,8 +151,8 @@ younger_people_layout = html.Div([
         dash_table.DataTable(
             id="all_data",
 
-            columns=[{'id': c, 'name': c} for c in all_data.columns],
-            data=all_data.to_dict('records'),
+            columns=[{'id': c, 'name': c} for c in england.columns],
+            data=england.to_dict('records'),
             filtering=True,
             sorting=True,
             sorting_type="single",
