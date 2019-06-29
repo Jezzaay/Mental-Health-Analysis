@@ -119,19 +119,76 @@ ax.plot(Lambeth_figures["AreaName"],  Lambeth_figures["IndicatorFigures"], 'bs' 
 plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
 plt.xlabel("Cities")
 plt.title("London in 2015 with GDHI and Amount of Mental Health In Younger People")
-#ax.legend(loc="best", numpoints = 1)
 plt.show()
 
 
+total_london = london_figures.groupby(["Year", "IndicatorFigures"]).size().reset_index()
+total_london.columns =  ["Year", "Figure_Amount", "IndicatorFigures"]
+plt.scatter(total_london["Year"], total_london["Figure_Amount"])
+plt.title("The amount of mental health indicator figures per year In London")
+plt.xlabel("Year")
+plt.ylabel("Figure Amount")
+plt.show()
 
 #East Mid
 east_mid = east_mid[east_mid != "England"]
 east_mid_data = east_mid.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
 east_mid_data.columns = ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
+
+#GHDI
+fig, ax = plt.subplots()
+
+eastmid_figures = east_mid.groupby(["Timeperiod", "AreaName"]).size().reset_index()
+eastmid_figures.columns =  ["Year", "AreaName", "IndicatorFigures"]
+
+eastmid_Derby = gdhi[(gdhi.region_name == "Derby")]
+Derby_figures = eastmid_figures[(eastmid_figures.AreaName == "Derby")]
+eastmid_Nottingham = gdhi[(gdhi.region_name == "Nottingham")]
+Nottingham_figures = eastmid_figures[(eastmid_figures.AreaName == "Nottingham")]
+eastmid_Leicester = gdhi[(gdhi.region_name == "Leicester")]
+Leicester_figures = eastmid_figures[(eastmid_figures.AreaName == "Leicester")]
+
+ax.bar(eastmid_Derby["region_name"], eastmid_Derby["2015"], label="GDHI")
+ax.plot(Derby_figures["AreaName"],  Derby_figures["IndicatorFigures"], 'bs'  )
+ax.bar(eastmid_Nottingham["region_name"], eastmid_Nottingham["2015"], label="GDHI")
+ax.plot(Nottingham_figures["AreaName"],  Nottingham_figures["IndicatorFigures"], 'bs'  )
+ax.bar(eastmid_Leicester["region_name"], eastmid_Leicester["2015"], label="GDHI")
+ax.plot(Leicester_figures["AreaName"],  Leicester_figures["IndicatorFigures"], 'bs'  )
+
+plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
+plt.xlabel("Cities")
+plt.title("East Midlands in 2015 with GDHI and Amount of Mental Health In Younger People")
+plt.show()
 #East England
 east_england = east_england[east_england!= "England"]
 east_england_data = east_england.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
 east_england_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
+
+#GHDI
+fig, ax = plt.subplots()
+
+eastengland_figures = east_england.groupby(["Timeperiod", "AreaName"]).size().reset_index()
+eastengland_figures.columns =  ["Year", "AreaName", "IndicatorFigures"]
+
+east_Luton = gdhi[(gdhi.region_name == "Luton")]
+Luton_figures = eastengland_figures[(eastengland_figures.AreaName == "Luton")]
+east_Bedford = gdhi[(gdhi.region_name == "Bedford")]
+Bedford_figures = eastengland_figures[(eastengland_figures.AreaName == "Bedford")]
+east_Peterborough = gdhi[(gdhi.region_name == "Peterborough")]
+Peterborough_figures = eastengland_figures[(eastengland_figures.AreaName == "Peterborough")]
+
+ax.bar(east_Luton["region_name"], east_Luton["2015"], label="GDHI")
+ax.plot(Luton_figures["AreaName"],  Luton_figures["IndicatorFigures"], 'bs'  )
+ax.bar(east_Bedford["region_name"], east_Bedford["2015"], label="GDHI")
+ax.plot(Bedford_figures["AreaName"],  Bedford_figures["IndicatorFigures"], 'bs'  )
+ax.bar(east_Peterborough["region_name"], east_Peterborough["2015"], label="GDHI")
+ax.plot(Peterborough_figures["AreaName"],  Peterborough_figures["IndicatorFigures"], 'bs'  )
+
+plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
+plt.xlabel("Cities")
+plt.title("East of England in 2015 with GDHI and Amount of Mental Health In Younger People")
+plt.show()
+
 #North East
 north_east = north_east[north_east!= "England"]
 ne_data = north_east.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
@@ -158,28 +215,153 @@ plt.title("North East in 2015 with GDHI and Amount of Mental Health In Younger P
 #ax.legend(loc="best", numpoints = 1)
 plt.show()
 
+total_ne = north_east_figures.groupby(["Year", "IndicatorFigures"]).size().reset_index()
+total_ne.columns =  ["Year", "Figure_Amount", "IndicatorFigures"]
+plt.scatter(total_ne["Year"], total_ne["Figure_Amount"])
+plt.title("The amount of mental health indicator figures per year in North East")
+plt.xlabel("Year")
+plt.ylabel("Figure Amount")
+plt.show()
 
 #North West
 north_west = north_west[north_west!= "England"]
 nw_data = north_west.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
 nw_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
+
+#GDHI
+fig, ax = plt.subplots()
+north_west_figures = north_west.groupby(["Timeperiod", "AreaName"]).size().reset_index()
+north_west_figures.columns =  ["Year", "AreaName", "IndicatorFigures"]
+nw_Manchester = gdhi[(gdhi.region_name == "Manchester")]
+Manchester_figures = north_west_figures[(north_west_figures.AreaName == "Manchester")]
+nw_Liverpool = gdhi[(gdhi.region_name  == "Liverpool")]
+Liverpool_figures = north_west_figures[(north_west_figures.AreaName == "Liverpool")]
+nw_Blackpool = gdhi[(gdhi.region_name == "Blackpool")]
+Blackpool_figures = north_east_figures[(north_east_figures.AreaName == "Blackpool")]
+ax.bar(nw_Manchester["region_name"], nw_Manchester["2015"], label="GDHI")
+ax.bar(nw_Liverpool["region_name"], nw_Liverpool["2015"], label="GDHI" )
+ax.bar(nw_Blackpool["region_name"], nw_Blackpool["2015"], label="GDHI" )
+ax.plot(Manchester_figures["AreaName"],  Manchester_figures["IndicatorFigures"], 'bs' )
+ax.plot(Liverpool_figures["AreaName"],  Liverpool_figures["IndicatorFigures"], 'bs'  )
+ax.plot(Blackpool_figures["AreaName"],  Blackpool_figures["IndicatorFigures"], 'bs'  )
+
+
+plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
+plt.xlabel("Cities")
+plt.title("North West in 2015 with GDHI and Amount of Mental Health In Younger People")
+plt.show()
+
 #South West
 south_west = south_west[south_east!= "England"]
 sw_data = south_west.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
 sw_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
+
+#GDHI
+fig, ax = plt.subplots()
+sw_figures = south_west.groupby(["Timeperiod", "AreaName"]).size().reset_index()
+sw_figures.columns =  ["Year", "AreaName", "IndicatorFigures"]
+sw_Swindon = gdhi[(gdhi.region_name == "Swindon")]
+Swindon_figures = sw_figures[(sw_figures.AreaName == "Swindon")]
+sw_Plymouth = gdhi[(gdhi.region_name  == "Plymouth")]
+Plymouth_figures = sw_figures[(sw_figures.AreaName == "Plymouth")]
+sw_Torbay = gdhi[(gdhi.region_name == "Torbay")]
+Torbay_figures = sw_figures[(sw_figures.AreaName == "Torbay")]
+ax.bar(sw_Swindon["region_name"], sw_Swindon["2015"], label="GDHI")
+ax.bar(sw_Plymouth["region_name"], sw_Plymouth["2015"], label="GDHI" )
+ax.bar(sw_Torbay["region_name"], sw_Torbay["2015"], label="GDHI" )
+ax.plot(Swindon_figures["AreaName"],  Swindon_figures["IndicatorFigures"], 'bs' )
+ax.plot(Plymouth_figures["AreaName"],  Plymouth_figures["IndicatorFigures"], 'bs'  )
+ax.plot(Torbay_figures["AreaName"],  Torbay_figures["IndicatorFigures"], 'bs'  )
+
+plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
+plt.xlabel("Cities")
+plt.title("South West in 2015 with GDHI and Amount of Mental Health In Younger People")
+plt.show()
+
 #South East
 south_east = south_east[south_east!= "England"]
 se_data = south_east.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
 se_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
+
+#GDHI
+fig, ax = plt.subplots()
+se_figures = south_east.groupby(["Timeperiod", "AreaName"]).size().reset_index()
+se_figures.columns =  ["Year", "AreaName", "IndicatorFigures"]
+se_MiltonKeynes = gdhi[(gdhi.region_name == "Milton Keynes")]
+MiltonKeynes_figures = se_figures[(se_figures.AreaName == "Milton Keynes")]
+se_Portsmouth = gdhi[(gdhi.region_name  == "Portsmouth")]
+Portsmouth_figures = se_figures[(se_figures.AreaName == "Portsmouth")]
+se_Berkshire = gdhi[(gdhi.region_name == "Berkshire")]
+Berkshire_figures = se_figures[(se_figures.AreaName == "Berkshire")]
+ax.bar(se_MiltonKeynes["region_name"], se_MiltonKeynes["2015"], label="GDHI")
+ax.bar(se_Portsmouth["region_name"], se_Portsmouth["2015"], label="GDHI" )
+ax.bar(se_Berkshire["region_name"], se_Berkshire["2015"], label="GDHI" )
+ax.plot(MiltonKeynes_figures["AreaName"],  MiltonKeynes_figures["IndicatorFigures"], 'bs' )
+ax.plot(Portsmouth_figures["AreaName"],  Portsmouth_figures["IndicatorFigures"], 'bs'  )
+ax.plot(Berkshire_figures["AreaName"],  Berkshire_figures["IndicatorFigures"], 'bs'  )
+
+plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
+plt.xlabel("Cities")
+plt.title("South East in 2015 with GDHI and Amount of Mental Health In Younger People")
+plt.show()
+
+
 #West Mid
 west_midlands = west_midlands[west_midlands!= "England"]
 west_mid_data = west_midlands.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
 west_mid_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
+
+
+#GDHI
+fig, ax = plt.subplots()
+westmid = west_midlands.groupby(["Timeperiod", "AreaName"]).size().reset_index()
+westmid.columns =  ["Year", "AreaName", "IndicatorFigures"]
+wmBirmingham = gdhi[(gdhi.region_name == "Birmingham")]
+Birmingham_figures = westmid[(westmid.AreaName == "Birmingham")]
+wmCoventry = gdhi[(gdhi.region_name  == "Coventry")]
+Coventry_figures = westmid[(westmid.AreaName == "Coventry")]
+wmStokeonTrent = gdhi[(gdhi.region_name == "Stoke-on-Trent")]
+StokeonTrent_figures = westmid[(westmid.AreaName == "Stoke-on-Trent")]
+ax.bar(wmBirmingham["region_name"], wmBirmingham["2015"], label="GDHI")
+ax.bar(wmCoventry["region_name"], wmCoventry["2015"], label="GDHI" )
+ax.bar(wmStokeonTrent["region_name"], wmStokeonTrent["2015"], label="GDHI" )
+ax.plot(Birmingham_figures["AreaName"],  Birmingham_figures["IndicatorFigures"], 'bs' )
+ax.plot(Coventry_figures["AreaName"],  Coventry_figures["IndicatorFigures"], 'bs'  )
+ax.plot(StokeonTrent_figures["AreaName"],  StokeonTrent_figures["IndicatorFigures"], 'bs'  )
+
+plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
+plt.xlabel("Cities")
+plt.title("West Midlands in 2015 with GDHI and Amount of Mental Health In Younger People")
+plt.show()
+
+
 #Yorkshire
 yorkshire = yorkshire[yorkshire!= "England"]
 yorkshire_data = yorkshire.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
 yorkshire_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
 
+
+#GDHI
+fig, ax = plt.subplots()
+yorkshire_figures = yorkshire.groupby(["Timeperiod", "AreaName"]).size().reset_index()
+yorkshire_figures.columns =  ["Year", "AreaName", "IndicatorFigures"]
+yorkYork = gdhi[(gdhi.region_name == "York")]
+York_figures = yorkshire_figures[(yorkshire_figures.AreaName == "York")]
+yorkSheffield = gdhi[(gdhi.region_name  == "Sheffield")]
+Sheffield_figures = yorkshire_figures[(yorkshire_figures.AreaName == "Sheffield")]
+yorkLeeds = gdhi[(gdhi.region_name == "Leeds")]
+Leeds_figures = yorkshire_figures[(yorkshire_figures.AreaName == "Leeds")]
+ax.bar(yorkYork["region_name"], yorkYork["2015"], label="GDHI")
+ax.bar(yorkSheffield["region_name"], yorkSheffield["2015"], label="GDHI" )
+ax.bar(yorkLeeds["region_name"], yorkLeeds["2015"], label="GDHI" )
+ax.plot(York_figures["AreaName"],  York_figures["IndicatorFigures"], 'bs' )
+ax.plot(Sheffield_figures["AreaName"],  Sheffield_figures["IndicatorFigures"], 'bs'  )
+ax.plot(Leeds_figures["AreaName"],  Leeds_figures["IndicatorFigures"], 'bs'  )
+
+plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
+plt.xlabel("Cities")
+plt.title("Yorkshire in 2015 with GDHI and Amount of Mental Health In Younger People")
+plt.show()
 
 
 
