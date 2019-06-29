@@ -119,7 +119,6 @@ ax.plot(Lambeth_figures["AreaName"],  Lambeth_figures["IndicatorFigures"], 'bs' 
 plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
 plt.xlabel("Cities")
 plt.title("London in 2015 with GDHI and Amount of Mental Health In Younger People")
-plt.show()
 
 
 total_london = london_figures.groupby(["Year", "IndicatorFigures"]).size().reset_index()
@@ -128,7 +127,6 @@ plt.scatter(total_london["Year"], total_london["Figure_Amount"])
 plt.title("The amount of mental health indicator figures per year In London")
 plt.xlabel("Year")
 plt.ylabel("Figure Amount")
-plt.show()
 
 #East Mid
 east_mid = east_mid[east_mid != "England"]
@@ -158,7 +156,6 @@ ax.plot(Leicester_figures["AreaName"],  Leicester_figures["IndicatorFigures"], '
 plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
 plt.xlabel("Cities")
 plt.title("East Midlands in 2015 with GDHI and Amount of Mental Health In Younger People")
-plt.show()
 #East England
 east_england = east_england[east_england!= "England"]
 east_england_data = east_england.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
@@ -187,7 +184,6 @@ ax.plot(Peterborough_figures["AreaName"],  Peterborough_figures["IndicatorFigure
 plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
 plt.xlabel("Cities")
 plt.title("East of England in 2015 with GDHI and Amount of Mental Health In Younger People")
-plt.show()
 
 #North East
 north_east = north_east[north_east!= "England"]
@@ -213,7 +209,7 @@ plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
 plt.xlabel("Cities")
 plt.title("North East in 2015 with GDHI and Amount of Mental Health In Younger People")
 #ax.legend(loc="best", numpoints = 1)
-plt.show()
+
 
 total_ne = north_east_figures.groupby(["Year", "IndicatorFigures"]).size().reset_index()
 total_ne.columns =  ["Year", "Figure_Amount", "IndicatorFigures"]
@@ -221,7 +217,7 @@ plt.scatter(total_ne["Year"], total_ne["Figure_Amount"])
 plt.title("The amount of mental health indicator figures per year in North East")
 plt.xlabel("Year")
 plt.ylabel("Figure Amount")
-plt.show()
+
 
 #North West
 north_west = north_west[north_west!= "England"]
@@ -249,7 +245,7 @@ ax.plot(Blackpool_figures["AreaName"],  Blackpool_figures["IndicatorFigures"], '
 plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
 plt.xlabel("Cities")
 plt.title("North West in 2015 with GDHI and Amount of Mental Health In Younger People")
-plt.show()
+
 
 #South West
 south_west = south_west[south_east!= "England"]
@@ -276,7 +272,7 @@ ax.plot(Torbay_figures["AreaName"],  Torbay_figures["IndicatorFigures"], 'bs'  )
 plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
 plt.xlabel("Cities")
 plt.title("South West in 2015 with GDHI and Amount of Mental Health In Younger People")
-plt.show()
+
 
 #South East
 south_east = south_east[south_east!= "England"]
@@ -303,7 +299,7 @@ ax.plot(Berkshire_figures["AreaName"],  Berkshire_figures["IndicatorFigures"], '
 plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
 plt.xlabel("Cities")
 plt.title("South East in 2015 with GDHI and Amount of Mental Health In Younger People")
-plt.show()
+
 
 
 #West Mid
@@ -332,7 +328,7 @@ ax.plot(StokeonTrent_figures["AreaName"],  StokeonTrent_figures["IndicatorFigure
 plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
 plt.xlabel("Cities")
 plt.title("West Midlands in 2015 with GDHI and Amount of Mental Health In Younger People")
-plt.show()
+
 
 
 #Yorkshire
@@ -361,7 +357,7 @@ ax.plot(Leeds_figures["AreaName"],  Leeds_figures["IndicatorFigures"], 'bs'  )
 plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
 plt.xlabel("Cities")
 plt.title("Yorkshire in 2015 with GDHI and Amount of Mental Health In Younger People")
-plt.show()
+
 
 
 
@@ -508,8 +504,6 @@ younger_people_layout = html.Div([
     html.Details([
         html.Summary("East Midlands Details"),
         html.Br(),
-
-html.Div([ ]),
         html.H1("East Midlands Data"),
         html.P("This includes areas such as Derby, Nottingham, Rutland"),
         html.Br(),
