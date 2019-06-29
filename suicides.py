@@ -11,7 +11,7 @@ import plotly
 from dash.dependencies import Input, Output
 from collections import Counter
 import plotly.graph_objs as go
-import plotly.tools as tls
+from plotly.tools import mpl_to_plotly
 
 from app import  app
 from gdhi_file import gdhi
@@ -60,6 +60,11 @@ all_data =  pd.concat(data_join)
 all_data = all_data[all_data.AreaName != "England"]
 all_data = all_data[all_data.ParentName != "England"]
 
+all = all_data.groupby(["Timeperiod", "AreaName"]).size().reset_index()
+all.columns = ["Year", "AreaName", "IndicatorFigures"]
+
+total_all = all.groupby([ "AreaName", "IndicatorFigures"]).size().reset_index()
+total_all.columns =  ["AreaName" ,"Figure_Amount", "IndicatorFigures"]
 #England With London
 england = all_data.groupby(["IndicatorName", "Timeperiod", "ParentName"]).size().reset_index()
 england.columns = ["IndicatorName", "Year", "Region", "IndicatorFigures"]
@@ -186,23 +191,26 @@ ne_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
 
 
 #GDHI
-fig, ax = plt.subplots()
+neplt = plt.figure()
+ax = neplt.subplots()
 north_east_figures = north_east.groupby(["Timeperiod", "AreaName"]).size().reset_index()
 north_east_figures.columns =  ["Year", "AreaName", "IndicatorFigures"]
 ne_sunderland = gdhi[(gdhi.region_name == "Sunderland")]
 sunderland_figures = north_east_figures[(north_east_figures.AreaName == "Sunderland")]
 ne_darlington = gdhi[(gdhi.region_name  == "Darlington")]
 darlington_figures = north_east_figures[(north_east_figures.AreaName == "Darlington")]
-ax.bar(ne_sunderland["region_name"], ne_sunderland["2015"], label="GDHI")
-ax.bar(ne_darlington["region_name"], ne_darlington["2015"], label="GDHI" )
+ax.bar(ne_sunderland["region_name"], ne_sunderland["2015"],label="Sunderland",)
+ax.bar(ne_darlington["region_name"], ne_darlington["2015"], label="Darlington",  )
 ax.plot(sunderland_figures["AreaName"],  sunderland_figures["IndicatorFigures"], 'bs' )
 ax.plot(darlington_figures["AreaName"],  darlington_figures["IndicatorFigures"], 'bs'  )
-
 
 plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
 plt.xlabel("Cities")
 plt.title("North East in 2015 with GDHI and Amount of Mental Health In Suicide")
 #ax.legend(loc="best", numpoints = 1)
+
+
+
 
 
 total_ne = north_east_figures.groupby(["Year", "IndicatorFigures"]).size().reset_index()
@@ -361,7 +369,35 @@ suicides_layout = html.Div([
 
 
     html.H1('Suicide Analysis', id="title"),
+    html.P("Suicide analysise comparing different regions of England"),
+    dcc.Graph(  # two csv files + bar charts
+        id='all_graph_gdhi',
+        figure={
+            'data': [
+                {'x': gdhi["region_name"],
+                 'y': gdhi["2017"],
+                 'type': 'bar',
+                 'hovertext': gdhi["region_name"],
+                 'name': "Gross disposable Household Income ",
+                 },
+                {
+                    'x': total_all["AreaName"],
+                    'y': total_all["IndicatorFigures"],
+                    'type': 'bar',
+                    'name': "Mental Health Figures",
 
+                },
+            ],
+            'layout': dict(title='England in 2017 with GDHI and Amount of Mental Health In Suicide',
+                           autosize=True,
+                           xaxis={'title': "Cities"},
+                           yaxis={'title': "Amount of £ GDHI and amount of mental health reports in orange)"},
+                           hovermode="compare",
+                           height=1500,
+
+                           )
+        }
+    ),
 
         html.Details([
             html.Summary("England Data"),
@@ -397,11 +433,17 @@ suicides_layout = html.Div([
                    "the data being shown can be more accurate and can give the viewer a better outlook on the data. "),
             html.Br(),
 
+
+            html.Details([
+                html.Summary("Graphs Comparing suicide rates with and without london "),
             html.Div([
 
                 html.P(
                     "Bar Plot for England Data without London. As London is massive it is important to show the England "
                     "data without London including, whereas another will also show London to compare. "),
+
+
+
                 dcc.Graph(
                     id='all_wo_lon_graph',
                     figure={
@@ -487,7 +529,7 @@ suicides_layout = html.Div([
                 ),
 
             ]),
-
+            ]),
         ]),
 
 
@@ -653,6 +695,8 @@ html.Div([
             }
         ),
 
+
+
         html.Div(id="london_container")
     ]),
 
@@ -664,7 +708,11 @@ html.Div([
 
         html.P("This includes areas such as Sunderland, Gateshead, Middlesbrough"),
 
+
+
         html.Br(),
+
+
 
         dash_table.DataTable(
             id="north_east_table",
@@ -710,7 +758,11 @@ html.Div([
                                )
             }
         ),
+
+
     ]),
+
+
 
 
     html.Details([
