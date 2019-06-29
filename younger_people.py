@@ -71,8 +71,10 @@ all_data = all_data[all_data.ParentName != "England"]
 all = all_data.groupby(["Timeperiod", "AreaName"]).size().reset_index()
 all.columns = ["Year", "AreaName", "IndicatorFigures"]
 
+all= all[all["Year"] == "2017/18"]
 total_all = all.groupby([ "AreaName", "IndicatorFigures"]).size().reset_index()
 total_all.columns =  ["AreaName" ,"Figure_Amount", "IndicatorFigures"]
+
 
 #England With London
 england = all_data.groupby(["IndicatorName", "Timeperiod", "ParentName"]).size().reset_index()
@@ -397,7 +399,7 @@ dcc.Graph(  # two csv files + bar charts
 
                 },
             ],
-            'layout': dict(title='England in 2017 with GDHI and Amount of Mental Health In Younger People',
+            'layout': dict(title='England in 2017/2018 with GDHI and Amount of Mental Health In Younger People',
                            autosize=True,
                            xaxis={'title': "Cities"},
                            yaxis={'title': "Amount of £ GDHI and amount of mental health reports in orange)"},

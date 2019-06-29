@@ -62,9 +62,11 @@ all_data = all_data[all_data.ParentName != "England"]
 
 all = all_data.groupby(["Timeperiod", "AreaName"]).size().reset_index()
 all.columns = ["Year", "AreaName", "IndicatorFigures"]
-
+all= all[all["Year"] == "2015 - 17"]
 total_all = all.groupby([ "AreaName", "IndicatorFigures"]).size().reset_index()
 total_all.columns =  ["AreaName" ,"Figure_Amount", "IndicatorFigures"]
+print(all)
+print(total_all)
 #England With London
 england = all_data.groupby(["IndicatorName", "Timeperiod", "ParentName"]).size().reset_index()
 england.columns = ["IndicatorName", "Year", "Region", "IndicatorFigures"]
@@ -382,13 +384,13 @@ suicides_layout = html.Div([
                  },
                 {
                     'x': total_all["AreaName"],
-                    'y': total_all["IndicatorFigures"],
+                    'y': total_all["Figure_Amount"],
                     'type': 'bar',
                     'name': "Mental Health Figures",
 
                 },
             ],
-            'layout': dict(title='England in 2017 with GDHI and Amount of Mental Health In Suicide',
+            'layout': dict(title='England in 2015 - 2017 with GDHI and Amount of Mental Health In Suicide',
                            autosize=True,
                            xaxis={'title': "Cities"},
                            yaxis={'title': "Amount of £ GDHI and amount of mental health reports in orange)"},
