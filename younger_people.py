@@ -67,6 +67,13 @@ all_data =  pd.concat(data_join)
 all_data = all_data[all_data.AreaName != "England"]
 all_data = all_data[all_data.ParentName != "England"]
 
+
+all = all_data.groupby(["Timeperiod", "AreaName"]).size().reset_index()
+all.columns = ["Year", "AreaName", "IndicatorFigures"]
+
+total_all = all.groupby([ "AreaName", "IndicatorFigures"]).size().reset_index()
+total_all.columns =  ["AreaName" ,"Figure_Amount", "IndicatorFigures"]
+
 #England With London
 england = all_data.groupby(["IndicatorName", "Timeperiod", "ParentName"]).size().reset_index()
 england.columns = ["IndicatorName", "Year", "Region", "IndicatorFigures"]
@@ -360,7 +367,6 @@ plt.title("Yorkshire in 2015 with GDHI and Amount of Mental Health In Younger Pe
 
 
 
-
 # Page Layout
 younger_people_layout = html.Div([
     html.H1('Children & Younger People Analysis', id="title"),
@@ -371,6 +377,37 @@ younger_people_layout = html.Div([
            "every reported case for that year within the dataset"),
     html.P("London has the largest of this data. To read London area names zooming in is required."
            "Each graph is scaled so the text is clearly visible. However, there are tools, to zoom in or out.   "),
+
+
+dcc.Graph(  # two csv files + bar charts
+        id='all_graph_gdhi',
+        figure={
+            'data': [
+                {'x': gdhi["region_name"],
+                 'y': gdhi["2017"],
+                 'type': 'bar',
+                 'hovertext': gdhi["region_name"],
+                 'name': "Gross disposable Household Income ",
+                 },
+                {
+                    'x': total_all["AreaName"],
+                    'y': total_all["Figure_Amount"],
+                    'type': 'bar',
+                    'name': "Mental Health Figures",
+
+                },
+            ],
+            'layout': dict(title='England in 2017 with GDHI and Amount of Mental Health In Younger People',
+                           autosize=True,
+                           xaxis={'title': "Cities"},
+                           yaxis={'title': "Amount of £ GDHI and amount of mental health reports in orange)"},
+                           hovermode="compare",
+                           height=1500,
+
+                           )
+        }
+    ),
+
 
     html.Details([ # Details allows to hide sections in the page until clicked.
         html.Summary("England Data"),
