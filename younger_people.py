@@ -15,6 +15,7 @@ import plotly.graph_objs as go
 import plotly.tools as tls
 
 from app import  app
+from gdhi_file import gdhi
 
 #import csv
 london = pd.read_csv('data/children & Younger people/indicators-CountyUA.data london young people.csv')
@@ -40,7 +41,6 @@ tables_to_drop = ["IndicatorID", "ParentCode",  "AreaCode",  "AreaType",
                                                 "New_data", "Compared_to_goal",
                   "Compared_to_England_value_or_percentiles","Compared_to_Region_value_or_percentiles",
                   "Lower_CI_95.0_limit"]
-
 
 
 
@@ -90,6 +90,40 @@ london= london[london.AreaName  != "England"]
 
 london_data = london.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
 london_data.columns = ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
+
+
+# GDHI
+fig, ax = plt.subplots()
+london_brent = gdhi[(gdhi.region_name == "Brent")]
+london_Enfield = gdhi[(gdhi.region_name == "Enfield")]
+london_Westminster = gdhi[(gdhi.region_name == "Westminster")]
+london_Lambeth = gdhi[(gdhi.region_name == "Lambeth")]
+london_figures = london.groupby(["Timeperiod", "AreaName"]).size().reset_index()
+london_figures.columns =  ["Year", "AreaName", "IndicatorFigures"]
+brent_figures = london_figures[(london_figures.AreaName == "Brent")]
+Enfield_figures = london_figures[(london_figures.AreaName == "Enfield")]
+Westminster_figures = london_figures[(london_figures.AreaName == "Westminster")]
+Lambeth_figures = london_figures[(london_figures.AreaName == "Lambeth")]
+
+
+
+ax.bar(london_brent["region_name"], london_brent["2015"], label="GDHI")
+ax.bar(london_Enfield["region_name"], london_Enfield["2015"], label="GDHI" )
+ax.bar(london_Westminster["region_name"], london_Westminster["2015"], label="GDHI" )
+ax.bar(london_Lambeth["region_name"], london_Lambeth["2015"], label="GDHI" )
+ax.plot(brent_figures["AreaName"],  brent_figures["IndicatorFigures"], 'bs' )
+ax.plot(Enfield_figures["AreaName"],  Enfield_figures["IndicatorFigures"], 'bs'  )
+ax.plot(Westminster_figures["AreaName"],  Westminster_figures["IndicatorFigures"], 'bs'  )
+ax.plot(Lambeth_figures["AreaName"],  Lambeth_figures["IndicatorFigures"], 'bs'  )
+
+plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
+plt.xlabel("Cities")
+plt.title("London in 2015 with GDHI and Amount of Mental Health In Younger People")
+#ax.legend(loc="best", numpoints = 1)
+plt.show()
+
+
+
 #East Mid
 east_mid = east_mid[east_mid != "England"]
 east_mid_data = east_mid.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
@@ -102,6 +136,29 @@ east_england_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFig
 north_east = north_east[north_east!= "England"]
 ne_data = north_east.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
 ne_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
+
+
+#GDHI
+fig, ax = plt.subplots()
+north_east_figures = north_east.groupby(["Timeperiod", "AreaName"]).size().reset_index()
+north_east_figures.columns =  ["Year", "AreaName", "IndicatorFigures"]
+ne_sunderland = gdhi[(gdhi.region_name == "Sunderland")]
+sunderland_figures = north_east_figures[(north_east_figures.AreaName == "Sunderland")]
+ne_darlington = gdhi[(gdhi.region_name  == "Darlington")]
+darlington_figures = north_east_figures[(north_east_figures.AreaName == "Darlington")]
+ax.bar(ne_sunderland["region_name"], ne_sunderland["2015"], label="GDHI")
+ax.bar(ne_darlington["region_name"], ne_darlington["2015"], label="GDHI" )
+ax.plot(sunderland_figures["AreaName"],  sunderland_figures["IndicatorFigures"], 'bs' )
+ax.plot(darlington_figures["AreaName"],  darlington_figures["IndicatorFigures"], 'bs'  )
+
+
+plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
+plt.xlabel("Cities")
+plt.title("North East in 2015 with GDHI and Amount of Mental Health In Younger People")
+#ax.legend(loc="best", numpoints = 1)
+plt.show()
+
+
 #North West
 north_west = north_west[north_west!= "England"]
 nw_data = north_west.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
@@ -122,6 +179,9 @@ west_mid_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures
 yorkshire = yorkshire[yorkshire!= "England"]
 yorkshire_data = yorkshire.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
 yorkshire_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
+
+
+
 
 # Page Layout
 younger_people_layout = html.Div([
