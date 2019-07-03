@@ -40,7 +40,7 @@ tables_to_drop = ["IndicatorID", "ParentCode",  "AreaCode",  "AreaType",
                       "Upper_CI_95.0_limit", "Lower_CI_99.8_limit",
                                                 "New_data", "Compared_to_goal",
                   "Compared_to_England_value_or_percentiles","Compared_to_Region_value_or_percentiles",
-                  "Lower_CI_95.0_limit"]
+                  "Lower_CI_95.0_limit", "Value", "Count", "Denominator"]
 
 
 
@@ -67,13 +67,24 @@ all_data =  pd.concat(data_join)
 all_data = all_data[all_data.AreaName != "England"]
 all_data = all_data[all_data.ParentName != "England"]
 
+all_data = all_data[~all_data.AreaName.str.contains("Greater*")]
+all_data = all_data[~all_data.AreaName.str.contains("West")]
+all_data = all_data[~all_data.AreaName.str.contains("East")]
+all_data = all_data[~all_data.AreaName.str.contains("North")]
+all_data = all_data[~all_data.AreaName.str.contains("South")]
+all_data = all_data[~all_data.AreaName.str.contains("Islands")]
+all_data = all_data[~all_data.AreaName.str.contains("shire")]
+all_data = all_data[~all_data.AreaName.str.contains("United Kingdom")]
+
+print(all_data)
+
 
 all = all_data.groupby(["Timeperiod", "AreaName"]).size().reset_index()
 all.columns = ["Year", "AreaName", "IndicatorFigures"]
 
-all= all[all["Year"] == "2017/18"]
-total_all = all.groupby([ "AreaName", "IndicatorFigures"]).size().reset_index()
-total_all.columns =  ["AreaName" ,"Figure_Amount", "IndicatorFigures"]
+all1718= all[all["Year"] == "2017/18"]
+all1718 = all1718.groupby([ "AreaName", "IndicatorFigures"]).size().reset_index()
+all1718.columns =  ["AreaName" ,"Figure_Amount", "IndicatorFigures"]
 
 
 #England With London
@@ -392,8 +403,8 @@ dcc.Graph(  # two csv files + bar charts
                  'name': "Gross disposable Household Income ",
                  },
                 {
-                    'x': total_all["AreaName"],
-                    'y': total_all["Figure_Amount"],
+                    'x': all1718["AreaName"],
+                    'y': all1718["Figure_Amount"],
                     'type': 'bar',
                     'name': "Mental Health Figures",
 

@@ -60,13 +60,23 @@ all_data =  pd.concat(data_join)
 all_data = all_data[all_data.AreaName != "England"]
 all_data = all_data[all_data.ParentName != "England"]
 
+
+
+all_data = all_data[~all_data.AreaName.str.contains("Greater*")]
+all_data = all_data[~all_data.AreaName.str.contains("West")]
+all_data = all_data[~all_data.AreaName.str.contains("East")]
+all_data = all_data[~all_data.AreaName.str.contains("North")]
+all_data = all_data[~all_data.AreaName.str.contains("South")]
+all_data = all_data[~all_data.AreaName.str.contains("Islands")]
+all_data = all_data[~all_data.AreaName.str.contains("shire")]
+all_data = all_data[~all_data.AreaName.str.contains("United Kingdom")]
+
 all = all_data.groupby(["Timeperiod", "AreaName"]).size().reset_index()
 all.columns = ["Year", "AreaName", "IndicatorFigures"]
-all= all[all["Year"] == "2015 - 17"]
-total_all = all.groupby([ "AreaName", "IndicatorFigures"]).size().reset_index()
-total_all.columns =  ["AreaName" ,"Figure_Amount", "IndicatorFigures"]
-print(all)
-print(total_all)
+all1517= all[all["Year"] == "2015 - 17"]
+all1517 = all1517.groupby([ "AreaName", "IndicatorFigures"]).size().reset_index()
+all1517.columns =  ["AreaName" ,"Figure_Amount", "IndicatorFigures"]
+
 #England With London
 england = all_data.groupby(["IndicatorName", "Timeperiod", "ParentName"]).size().reset_index()
 england.columns = ["IndicatorName", "Year", "Region", "IndicatorFigures"]
@@ -383,8 +393,8 @@ suicides_layout = html.Div([
                  'name': "Gross disposable Household Income ",
                  },
                 {
-                    'x': total_all["AreaName"],
-                    'y': total_all["Figure_Amount"],
+                    'x': all1517["AreaName"],
+                    'y': all1517["Figure_Amount"],
                     'type': 'bar',
                     'name': "Mental Health Figures",
 
