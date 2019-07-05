@@ -50,6 +50,75 @@ south_east = south_east.drop(tables_to_drop, axis = 1)
 west_midlands = west_midlands.drop(tables_to_drop, axis = 1)
 yorkshire = yorkshire.drop(tables_to_drop, axis = 1)
 
+#Clearing data which is not cities
+east_mid = east_mid[~east_mid.AreaName.str.contains("East") &
+                            ~east_mid.AreaName.str.contains("shire")]
+
+east_england = east_england[~east_england.AreaName.str.contains("East") &
+                            ~east_england.AreaName.str.contains("shire")]
+
+london = london[~london.AreaName.str.contains("East") &
+                            ~london.AreaName.str.contains("shire") &
+                            ~london.AreaName.str.contains("England")&
+                            ~london.AreaName.str.contains("City")    ]
+
+north_east = north_east[~north_east.AreaName.str.contains("North") &
+                        ~north_east.AreaName.str.contains("South") &
+                            ~north_east.AreaName.str.contains("shire")&
+                        ~north_east.AreaName.str.contains("County") ]
+
+
+north_west = north_west[~north_west.AreaName.str.contains("North") &
+                        ~north_west.AreaName.str.contains("South") &
+                            ~north_west.AreaName.str.contains("shire")&
+                        ~north_west.AreaName.str.contains("East") ]
+
+
+south_west = south_west[~south_west.AreaName.str.contains("North") &
+                        ~south_west.AreaName.str.contains("South") &
+                            ~south_west.AreaName.str.contains("shire")&
+                        ~south_west.AreaName.str.contains("East") &
+                        ~south_west.AreaName.str.contains("England") ]
+
+
+south_east = south_east[~south_east.AreaName.str.contains("North") &
+                        ~south_east.AreaName.str.contains("South") &
+                            ~south_east.AreaName.str.contains("shire")&
+                        ~south_east.AreaName.str.contains("East") &
+                        ~south_east.AreaName.str.contains("England")&
+                        ~south_east.AreaName.str.contains("West")]
+
+west_midlands = west_midlands[~west_midlands.AreaName.str.contains("North") &
+                        ~west_midlands.AreaName.str.contains("South") &
+                            ~west_midlands.AreaName.str.contains("shire")&
+                        ~west_midlands.AreaName.str.contains("East") &
+                        ~west_midlands.AreaName.str.contains("England")&
+                        ~west_midlands.AreaName.str.contains("West")]
+
+yorkshire = yorkshire[~yorkshire.AreaName.str.contains("North") &
+                        ~yorkshire.AreaName.str.contains("South") &
+                            ~yorkshire.AreaName.str.contains("shire")&
+                        ~yorkshire.AreaName.str.contains("East") &
+                        ~yorkshire.AreaName.str.contains("England")&
+                        ~yorkshire.AreaName.str.contains("West")]
+
+
+
+#rename Persons to Unknown Sex
+
+london["Sex"] = london["Sex"].replace({'Persons':'Unknown'})
+east_mid["Sex"] = east_mid["Sex"].replace({'Persons':'Unknown'})
+east_england["Sex"] = east_england["Sex"].replace({'Persons':'Unknown'})
+north_east["Sex"] = north_east["Sex"].replace({'Persons':'Unknown'})
+north_west["Sex"] = north_west["Sex"].replace({'Persons':'Unknown'})
+south_west["Sex"] = south_west["Sex"].replace({'Persons':'Unknown'})
+south_east["Sex"] = south_east["Sex"].replace({'Persons':'Unknown'})
+south_east["Sex"] = south_east["Sex"].replace({'Persons':'Unknown'})
+west_midlands["Sex"] = west_midlands["Sex"].replace({'Persons':'Unknown'})
+yorkshire["Sex"] = yorkshire["Sex"].replace({'Persons':'Unknown'})
+
+
+
 data_join = [london, east_mid, east_england, north_east, north_west,
              south_west, south_east, west_midlands, yorkshire]
 

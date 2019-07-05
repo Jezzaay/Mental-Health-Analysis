@@ -67,5 +67,4 @@ gdhi = gdhi[~gdhi.region_name.str.contains("Heart")]
 
 
 
-print(gdhi)
 

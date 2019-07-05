@@ -17,6 +17,7 @@ import plotly.tools as tls
 from app import  app
 from gdhi_file import gdhi
 
+
 #import csv
 london = pd.read_csv('data/children & Younger people/indicators-CountyUA.data london young people.csv')
 east_mid = pd.read_csv("data/children & Younger people/indicators-CountyUA.data east mid.csv")
@@ -54,6 +55,89 @@ south_east = south_east.drop(tables_to_drop, axis = 1)
 west_midlands = west_midlands.drop(tables_to_drop, axis = 1)
 yorkshire = yorkshire.drop(tables_to_drop, axis = 1)
 
+#Clearing data which is not cities
+east_mid = east_mid[~east_mid.AreaName.str.contains("East") &
+                            ~east_mid.AreaName.str.contains("shire")]
+
+east_england = east_england[~east_england.AreaName.str.contains("East") &
+                            ~east_england.AreaName.str.contains("shire")]
+
+london = london[~london.AreaName.str.contains("East") &
+                            ~london.AreaName.str.contains("shire") &
+                            ~london.AreaName.str.contains("England")&
+                            ~london.AreaName.str.contains("City") &
+                            ~london.Age.str.contains("45+")&
+                            ~london.Age.str.contains("Not")&
+                            ~london.Age.str.contains("Dependent")&
+                            ~london.Age.str.contains("15 yrs")&
+                            ~london.Age.str.contains("<")&
+                            ~london.Age.str.contains("5 yrs")&
+                            ~london.Age.str.contains("5-15")&
+                            ~london.Age.str.contains("Secondary")&
+                            ~london.Age.str.contains("15-19")&
+                            ~london.Age.str.contains("10-17")&
+                            ~london.Age.str.contains("School age") &
+                            ~london.Age.str.contains("15-16") &
+                            ~london.Age.str.contains("0-19") &
+                            ~london.Age.str.contains("16-17")    ]
+
+north_east = north_east[~north_east.AreaName.str.contains("North") &
+                        ~north_east.AreaName.str.contains("South") &
+                            ~north_east.AreaName.str.contains("shire")&
+                        ~north_east.AreaName.str.contains("County") ]
+
+
+north_west = north_west[~north_west.AreaName.str.contains("North") &
+                        ~north_west.AreaName.str.contains("South") &
+                            ~north_west.AreaName.str.contains("shire")&
+                        ~north_west.AreaName.str.contains("East") ]
+
+
+south_west = south_west[~south_west.AreaName.str.contains("North") &
+                        ~south_west.AreaName.str.contains("South") &
+                            ~south_west.AreaName.str.contains("shire")&
+                        ~south_west.AreaName.str.contains("East") &
+                        ~south_west.AreaName.str.contains("England") ]
+
+
+south_east = south_east[~south_east.AreaName.str.contains("North") &
+                        ~south_east.AreaName.str.contains("South") &
+                            ~south_east.AreaName.str.contains("shire")&
+                        ~south_east.AreaName.str.contains("East") &
+                        ~south_east.AreaName.str.contains("England")&
+                        ~south_east.AreaName.str.contains("West")]
+
+west_midlands = west_midlands[~west_midlands.AreaName.str.contains("North") &
+                        ~west_midlands.AreaName.str.contains("South") &
+                            ~west_midlands.AreaName.str.contains("shire")&
+                        ~west_midlands.AreaName.str.contains("East") &
+                        ~west_midlands.AreaName.str.contains("England")&
+                        ~west_midlands.AreaName.str.contains("West")]
+
+yorkshire = yorkshire[~yorkshire.AreaName.str.contains("North") &
+                        ~yorkshire.AreaName.str.contains("South") &
+                            ~yorkshire.AreaName.str.contains("shire")&
+                        ~yorkshire.AreaName.str.contains("East") &
+                        ~yorkshire.AreaName.str.contains("England")&
+                        ~yorkshire.AreaName.str.contains("West")]
+
+
+
+#rename Persons to Unknown Sex
+
+london["Sex"] = london["Sex"].replace({'Persons':'Unknown'})
+east_mid["Sex"] = east_mid["Sex"].replace({'Persons':'Unknown'})
+east_england["Sex"] = east_england["Sex"].replace({'Persons':'Unknown'})
+north_east["Sex"] = north_east["Sex"].replace({'Persons':'Unknown'})
+north_west["Sex"] = north_west["Sex"].replace({'Persons':'Unknown'})
+south_west["Sex"] = south_west["Sex"].replace({'Persons':'Unknown'})
+south_east["Sex"] = south_east["Sex"].replace({'Persons':'Unknown'})
+south_east["Sex"] = south_east["Sex"].replace({'Persons':'Unknown'})
+west_midlands["Sex"] = west_midlands["Sex"].replace({'Persons':'Unknown'})
+yorkshire["Sex"] = yorkshire["Sex"].replace({'Persons':'Unknown'})
+
+
+
 #joining the columns together for the all data section
 data_join = [london, east_mid, east_england, north_east, north_west,
              south_west, south_east, west_midlands, yorkshire]
@@ -76,15 +160,14 @@ all_data = all_data[~all_data.AreaName.str.contains("Islands")]
 all_data = all_data[~all_data.AreaName.str.contains("shire")]
 all_data = all_data[~all_data.AreaName.str.contains("United Kingdom")]
 
-print(all_data)
 
 
-all = all_data.groupby(["Timeperiod", "AreaName"]).size().reset_index()
-all.columns = ["Year", "AreaName", "IndicatorFigures"]
+all = all_data.groupby(["Timeperiod","Sex",  "AreaName"]).size().reset_index()
+all.columns = ["Year", "Sex", "AreaName", "IndicatorFigures"]
 
-all1718= all[all["Year"] == "2017/18"]
-all1718 = all1718.groupby([ "AreaName", "IndicatorFigures"]).size().reset_index()
-all1718.columns =  ["AreaName" ,"Figure_Amount", "IndicatorFigures"]
+#all1718= all[all["Year"] == "2017/18"]
+#all1718 = all1718.groupby([ "AreaName", "IndicatorFigures"]).size().reset_index()
+#all1718.columns =  ["AreaName" ,"Figure_Amount", "IndicatorFigures"]
 
 
 #England With London
@@ -108,275 +191,69 @@ england_reg.columns = ["Region", "Year", "Figures"]
 #London Data
 london= london[london.AreaName  != "England"]
 
-london_data = london.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
-london_data.columns = ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
-
-
-# GDHI
-fig, ax = plt.subplots()
-london_brent = gdhi[(gdhi.region_name == "Brent")]
-london_Enfield = gdhi[(gdhi.region_name == "Enfield")]
-london_Westminster = gdhi[(gdhi.region_name == "Westminster")]
-london_Lambeth = gdhi[(gdhi.region_name == "Lambeth")]
-london_figures = london.groupby(["Timeperiod", "AreaName"]).size().reset_index()
-london_figures.columns =  ["Year", "AreaName", "IndicatorFigures"]
-brent_figures = london_figures[(london_figures.AreaName == "Brent")]
-Enfield_figures = london_figures[(london_figures.AreaName == "Enfield")]
-Westminster_figures = london_figures[(london_figures.AreaName == "Westminster")]
-Lambeth_figures = london_figures[(london_figures.AreaName == "Lambeth")]
+london_data = london.groupby(["AreaName","IndicatorName", "Age"]).size().reset_index()
+london_data.columns = ["AreaName", "IndicatorName", "Age",  "IndicatorFigures"]
 
 
 
-ax.bar(london_brent["region_name"], london_brent["2015"], label="GDHI")
-ax.bar(london_Enfield["region_name"], london_Enfield["2015"], label="GDHI" )
-ax.bar(london_Westminster["region_name"], london_Westminster["2015"], label="GDHI" )
-ax.bar(london_Lambeth["region_name"], london_Lambeth["2015"], label="GDHI" )
-ax.plot(brent_figures["AreaName"],  brent_figures["IndicatorFigures"], 'bs' )
-ax.plot(Enfield_figures["AreaName"],  Enfield_figures["IndicatorFigures"], 'bs'  )
-ax.plot(Westminster_figures["AreaName"],  Westminster_figures["IndicatorFigures"], 'bs'  )
-ax.plot(Lambeth_figures["AreaName"],  Lambeth_figures["IndicatorFigures"], 'bs'  )
-
-plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
-plt.xlabel("Cities")
-plt.title("London in 2015 with GDHI and Amount of Mental Health In Younger People")
-
-
-total_london = london_figures.groupby(["Year", "IndicatorFigures"]).size().reset_index()
-total_london.columns =  ["Year", "Figure_Amount", "IndicatorFigures"]
-plt.scatter(total_london["Year"], total_london["Figure_Amount"])
-plt.title("The amount of mental health indicator figures per year In London")
-plt.xlabel("Year")
-plt.ylabel("Figure Amount")
 
 #East Mid
 east_mid = east_mid[east_mid != "England"]
-east_mid_data = east_mid.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
-east_mid_data.columns = ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
+east_mid_data = east_mid.groupby(["IndicatorName", "Sex", "Age",  "AreaName"]).size().reset_index()
+east_mid_data.columns = ["IndicatorName", "Sex", "Age",  "AreaName", "IndicatorFigures"]
 
-#GHDI
-fig, ax = plt.subplots()
 
-eastmid_figures = east_mid.groupby(["Timeperiod", "AreaName"]).size().reset_index()
-eastmid_figures.columns =  ["Year", "AreaName", "IndicatorFigures"]
-
-eastmid_Derby = gdhi[(gdhi.region_name == "Derby")]
-Derby_figures = eastmid_figures[(eastmid_figures.AreaName == "Derby")]
-eastmid_Nottingham = gdhi[(gdhi.region_name == "Nottingham")]
-Nottingham_figures = eastmid_figures[(eastmid_figures.AreaName == "Nottingham")]
-eastmid_Leicester = gdhi[(gdhi.region_name == "Leicester")]
-Leicester_figures = eastmid_figures[(eastmid_figures.AreaName == "Leicester")]
-
-ax.bar(eastmid_Derby["region_name"], eastmid_Derby["2015"], label="GDHI")
-ax.plot(Derby_figures["AreaName"],  Derby_figures["IndicatorFigures"], 'bs'  )
-ax.bar(eastmid_Nottingham["region_name"], eastmid_Nottingham["2015"], label="GDHI")
-ax.plot(Nottingham_figures["AreaName"],  Nottingham_figures["IndicatorFigures"], 'bs'  )
-ax.bar(eastmid_Leicester["region_name"], eastmid_Leicester["2015"], label="GDHI")
-ax.plot(Leicester_figures["AreaName"],  Leicester_figures["IndicatorFigures"], 'bs'  )
-
-plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
-plt.xlabel("Cities")
-plt.title("East Midlands in 2015 with GDHI and Amount of Mental Health In Younger People")
 #East England
 east_england = east_england[east_england!= "England"]
-east_england_data = east_england.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
-east_england_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
+east_england_data = east_england.groupby(["IndicatorName", "Sex", "Age",  "AreaName"]).size().reset_index()
+east_england_data.columns =  ["IndicatorName", "Sex","Age",  "AreaName", "IndicatorFigures"]
 
-#GHDI
-fig, ax = plt.subplots()
 
-eastengland_figures = east_england.groupby(["Timeperiod", "AreaName"]).size().reset_index()
-eastengland_figures.columns =  ["Year", "AreaName", "IndicatorFigures"]
-
-east_Luton = gdhi[(gdhi.region_name == "Luton")]
-Luton_figures = eastengland_figures[(eastengland_figures.AreaName == "Luton")]
-east_Bedford = gdhi[(gdhi.region_name == "Bedford")]
-Bedford_figures = eastengland_figures[(eastengland_figures.AreaName == "Bedford")]
-east_Peterborough = gdhi[(gdhi.region_name == "Peterborough")]
-Peterborough_figures = eastengland_figures[(eastengland_figures.AreaName == "Peterborough")]
-
-ax.bar(east_Luton["region_name"], east_Luton["2015"], label="GDHI")
-ax.plot(Luton_figures["AreaName"],  Luton_figures["IndicatorFigures"], 'bs'  )
-ax.bar(east_Bedford["region_name"], east_Bedford["2015"], label="GDHI")
-ax.plot(Bedford_figures["AreaName"],  Bedford_figures["IndicatorFigures"], 'bs'  )
-ax.bar(east_Peterborough["region_name"], east_Peterborough["2015"], label="GDHI")
-ax.plot(Peterborough_figures["AreaName"],  Peterborough_figures["IndicatorFigures"], 'bs'  )
-
-plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
-plt.xlabel("Cities")
-plt.title("East of England in 2015 with GDHI and Amount of Mental Health In Younger People")
 
 #North East
 north_east = north_east[north_east!= "England"]
-ne_data = north_east.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
-ne_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
+ne_data = north_east.groupby(["IndicatorName", "Sex", "Age",  "AreaName"]).size().reset_index()
+ne_data.columns =  ["IndicatorName", "Sex", "Age", "AreaName", "IndicatorFigures"]
 
-
-#GDHI
-fig, ax = plt.subplots()
-north_east_figures = north_east.groupby(["Timeperiod", "AreaName"]).size().reset_index()
-north_east_figures.columns =  ["Year", "AreaName", "IndicatorFigures"]
-ne_sunderland = gdhi[(gdhi.region_name == "Sunderland")]
-sunderland_figures = north_east_figures[(north_east_figures.AreaName == "Sunderland")]
-ne_darlington = gdhi[(gdhi.region_name  == "Darlington")]
-darlington_figures = north_east_figures[(north_east_figures.AreaName == "Darlington")]
-ax.bar(ne_sunderland["region_name"], ne_sunderland["2015"], label="GDHI")
-ax.bar(ne_darlington["region_name"], ne_darlington["2015"], label="GDHI" )
-ax.plot(sunderland_figures["AreaName"],  sunderland_figures["IndicatorFigures"], 'bs' )
-ax.plot(darlington_figures["AreaName"],  darlington_figures["IndicatorFigures"], 'bs'  )
-
-
-plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
-plt.xlabel("Cities")
-plt.title("North East in 2015 with GDHI and Amount of Mental Health In Younger People")
-#ax.legend(loc="best", numpoints = 1)
-
-
-total_ne = north_east_figures.groupby(["Year", "IndicatorFigures"]).size().reset_index()
-total_ne.columns =  ["Year", "Figure_Amount", "IndicatorFigures"]
-plt.scatter(total_ne["Year"], total_ne["Figure_Amount"])
-plt.title("The amount of mental health indicator figures per year in North East")
-plt.xlabel("Year")
-plt.ylabel("Figure Amount")
 
 
 #North West
 north_west = north_west[north_west!= "England"]
-nw_data = north_west.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
-nw_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
+nw_data = north_west.groupby(["IndicatorName", "Sex", "Age", "AreaName"]).size().reset_index()
+nw_data.columns =  ["IndicatorName", "Sex", "Age", "AreaName", "IndicatorFigures"]
 
-#GDHI
-fig, ax = plt.subplots()
-north_west_figures = north_west.groupby(["Timeperiod", "AreaName"]).size().reset_index()
-north_west_figures.columns =  ["Year", "AreaName", "IndicatorFigures"]
-nw_Manchester = gdhi[(gdhi.region_name == "Manchester")]
-Manchester_figures = north_west_figures[(north_west_figures.AreaName == "Manchester")]
-nw_Liverpool = gdhi[(gdhi.region_name  == "Liverpool")]
-Liverpool_figures = north_west_figures[(north_west_figures.AreaName == "Liverpool")]
-nw_Blackpool = gdhi[(gdhi.region_name == "Blackpool")]
-Blackpool_figures = north_east_figures[(north_east_figures.AreaName == "Blackpool")]
-ax.bar(nw_Manchester["region_name"], nw_Manchester["2015"], label="GDHI")
-ax.bar(nw_Liverpool["region_name"], nw_Liverpool["2015"], label="GDHI" )
-ax.bar(nw_Blackpool["region_name"], nw_Blackpool["2015"], label="GDHI" )
-ax.plot(Manchester_figures["AreaName"],  Manchester_figures["IndicatorFigures"], 'bs' )
-ax.plot(Liverpool_figures["AreaName"],  Liverpool_figures["IndicatorFigures"], 'bs'  )
-ax.plot(Blackpool_figures["AreaName"],  Blackpool_figures["IndicatorFigures"], 'bs'  )
-
-
-plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
-plt.xlabel("Cities")
-plt.title("North West in 2015 with GDHI and Amount of Mental Health In Younger People")
 
 
 #South West
 south_west = south_west[south_east!= "England"]
-sw_data = south_west.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
-sw_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
+sw_data = south_west.groupby(["IndicatorName", "Sex", "Age",  "AreaName"]).size().reset_index()
+sw_data.columns =  ["IndicatorName", "Sex", "Age",  "AreaName", "IndicatorFigures"]
 
-#GDHI
-fig, ax = plt.subplots()
-sw_figures = south_west.groupby(["Timeperiod", "AreaName"]).size().reset_index()
-sw_figures.columns =  ["Year", "AreaName", "IndicatorFigures"]
-sw_Swindon = gdhi[(gdhi.region_name == "Swindon")]
-Swindon_figures = sw_figures[(sw_figures.AreaName == "Swindon")]
-sw_Plymouth = gdhi[(gdhi.region_name  == "Plymouth")]
-Plymouth_figures = sw_figures[(sw_figures.AreaName == "Plymouth")]
-sw_Torbay = gdhi[(gdhi.region_name == "Torbay")]
-Torbay_figures = sw_figures[(sw_figures.AreaName == "Torbay")]
-ax.bar(sw_Swindon["region_name"], sw_Swindon["2015"], label="GDHI")
-ax.bar(sw_Plymouth["region_name"], sw_Plymouth["2015"], label="GDHI" )
-ax.bar(sw_Torbay["region_name"], sw_Torbay["2015"], label="GDHI" )
-ax.plot(Swindon_figures["AreaName"],  Swindon_figures["IndicatorFigures"], 'bs' )
-ax.plot(Plymouth_figures["AreaName"],  Plymouth_figures["IndicatorFigures"], 'bs'  )
-ax.plot(Torbay_figures["AreaName"],  Torbay_figures["IndicatorFigures"], 'bs'  )
-
-plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
-plt.xlabel("Cities")
-plt.title("South West in 2015 with GDHI and Amount of Mental Health In Younger People")
 
 
 #South East
 south_east = south_east[south_east!= "England"]
-se_data = south_east.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
-se_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
+se_data = south_east.groupby(["IndicatorName", "Sex", "Age",  "AreaName"]).size().reset_index()
+se_data.columns =  ["IndicatorName",  "Sex", "Age",  "AreaName", "IndicatorFigures"]
 
-#GDHI
-fig, ax = plt.subplots()
-se_figures = south_east.groupby(["Timeperiod", "AreaName"]).size().reset_index()
-se_figures.columns =  ["Year", "AreaName", "IndicatorFigures"]
-se_MiltonKeynes = gdhi[(gdhi.region_name == "Milton Keynes")]
-MiltonKeynes_figures = se_figures[(se_figures.AreaName == "Milton Keynes")]
-se_Portsmouth = gdhi[(gdhi.region_name  == "Portsmouth")]
-Portsmouth_figures = se_figures[(se_figures.AreaName == "Portsmouth")]
-se_Berkshire = gdhi[(gdhi.region_name == "Berkshire")]
-Berkshire_figures = se_figures[(se_figures.AreaName == "Berkshire")]
-ax.bar(se_MiltonKeynes["region_name"], se_MiltonKeynes["2015"], label="GDHI")
-ax.bar(se_Portsmouth["region_name"], se_Portsmouth["2015"], label="GDHI" )
-ax.bar(se_Berkshire["region_name"], se_Berkshire["2015"], label="GDHI" )
-ax.plot(MiltonKeynes_figures["AreaName"],  MiltonKeynes_figures["IndicatorFigures"], 'bs' )
-ax.plot(Portsmouth_figures["AreaName"],  Portsmouth_figures["IndicatorFigures"], 'bs'  )
-ax.plot(Berkshire_figures["AreaName"],  Berkshire_figures["IndicatorFigures"], 'bs'  )
 
-plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
-plt.xlabel("Cities")
-plt.title("South East in 2015 with GDHI and Amount of Mental Health In Younger People")
+
 
 
 
 #West Mid
 west_midlands = west_midlands[west_midlands!= "England"]
-west_mid_data = west_midlands.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
-west_mid_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
+west_mid_data = west_midlands.groupby(["IndicatorName", "Sex", "Age", "AreaName"]).size().reset_index()
+west_mid_data.columns =  ["IndicatorName", "Sex", "Age",  "AreaName", "IndicatorFigures"]
 
-
-#GDHI
-fig, ax = plt.subplots()
-westmid = west_midlands.groupby(["Timeperiod", "AreaName"]).size().reset_index()
-westmid.columns =  ["Year", "AreaName", "IndicatorFigures"]
-wmBirmingham = gdhi[(gdhi.region_name == "Birmingham")]
-Birmingham_figures = westmid[(westmid.AreaName == "Birmingham")]
-wmCoventry = gdhi[(gdhi.region_name  == "Coventry")]
-Coventry_figures = westmid[(westmid.AreaName == "Coventry")]
-wmStokeonTrent = gdhi[(gdhi.region_name == "Stoke-on-Trent")]
-StokeonTrent_figures = westmid[(westmid.AreaName == "Stoke-on-Trent")]
-ax.bar(wmBirmingham["region_name"], wmBirmingham["2015"], label="GDHI")
-ax.bar(wmCoventry["region_name"], wmCoventry["2015"], label="GDHI" )
-ax.bar(wmStokeonTrent["region_name"], wmStokeonTrent["2015"], label="GDHI" )
-ax.plot(Birmingham_figures["AreaName"],  Birmingham_figures["IndicatorFigures"], 'bs' )
-ax.plot(Coventry_figures["AreaName"],  Coventry_figures["IndicatorFigures"], 'bs'  )
-ax.plot(StokeonTrent_figures["AreaName"],  StokeonTrent_figures["IndicatorFigures"], 'bs'  )
-
-plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
-plt.xlabel("Cities")
-plt.title("West Midlands in 2015 with GDHI and Amount of Mental Health In Younger People")
 
 
 
 #Yorkshire
 yorkshire = yorkshire[yorkshire!= "England"]
-yorkshire_data = yorkshire.groupby(["IndicatorName", "Timeperiod", "AreaName"]).size().reset_index()
-yorkshire_data.columns =  ["IndicatorName", "Year", "AreaName", "IndicatorFigures"]
+yorkshire_data = yorkshire.groupby(["IndicatorName", "Sex", "Age", "AreaName"]).size().reset_index()
+yorkshire_data.columns =  ["IndicatorName", "Sex", "Age",  "AreaName", "IndicatorFigures"]
 
-
-#GDHI
-fig, ax = plt.subplots()
-yorkshire_figures = yorkshire.groupby(["Timeperiod", "AreaName"]).size().reset_index()
-yorkshire_figures.columns =  ["Year", "AreaName", "IndicatorFigures"]
-yorkYork = gdhi[(gdhi.region_name == "York")]
-York_figures = yorkshire_figures[(yorkshire_figures.AreaName == "York")]
-yorkSheffield = gdhi[(gdhi.region_name  == "Sheffield")]
-Sheffield_figures = yorkshire_figures[(yorkshire_figures.AreaName == "Sheffield")]
-yorkLeeds = gdhi[(gdhi.region_name == "Leeds")]
-Leeds_figures = yorkshire_figures[(yorkshire_figures.AreaName == "Leeds")]
-ax.bar(yorkYork["region_name"], yorkYork["2015"], label="GDHI")
-ax.bar(yorkSheffield["region_name"], yorkSheffield["2015"], label="GDHI" )
-ax.bar(yorkLeeds["region_name"], yorkLeeds["2015"], label="GDHI" )
-ax.plot(York_figures["AreaName"],  York_figures["IndicatorFigures"], 'bs' )
-ax.plot(Sheffield_figures["AreaName"],  Sheffield_figures["IndicatorFigures"], 'bs'  )
-ax.plot(Leeds_figures["AreaName"],  Leeds_figures["IndicatorFigures"], 'bs'  )
-
-plt.ylabel("Amount of £ GDHI and amount of mental health reports in blue")
-plt.xlabel("Cities")
-plt.title("Yorkshire in 2015 with GDHI and Amount of Mental Health In Younger People")
 
 
 
@@ -392,7 +269,7 @@ younger_people_layout = html.Div([
            "Each graph is scaled so the text is clearly visible. However, there are tools, to zoom in or out.   "),
 
 
-dcc.Graph(  # two csv files + bar charts
+dcc.Graph(
         id='all_graph_gdhi',
         figure={
             'data': [
@@ -402,18 +279,11 @@ dcc.Graph(  # two csv files + bar charts
                  'hovertext': gdhi["region_name"],
                  'name': "Gross disposable Household Income ",
                  },
-                {
-                    'x': all1718["AreaName"],
-                    'y': all1718["Figure_Amount"],
-                    'type': 'bar',
-                    'name': "Mental Health Figures",
-
-                },
             ],
-            'layout': dict(title='England in 2017/2018 with GDHI and Amount of Mental Health In Younger People',
+            'layout': dict(title='England 2017 Gross Dispoable HouseHld income ',
                            autosize=True,
                            xaxis={'title': "Cities"},
-                           yaxis={'title': "Amount of £ GDHI and amount of mental health reports in orange)"},
+                           yaxis={'title': "Amount of £ GDHI"},
                            hovermode="compare",
                            height=1500,
 
@@ -586,7 +456,7 @@ dcc.Graph(  # two csv files + bar charts
             id='east_mid_graph',
             figure={
                 'data': [
-                    {'x': east_mid_data["Year"],
+                    {'x': east_mid_data["Age"],
                      'y': east_mid_data["IndicatorFigures"], 'type': 'bar',
                      'text': east_mid_data["AreaName"],
                      'textposition': "inside",
@@ -597,7 +467,7 @@ dcc.Graph(  # two csv files + bar charts
                      }
                 ],
                 'layout': dict(title='East Midlands Younger People Data', autosize=True, barmode="stack",
-                               xaxis={'title': "Years"},
+                               xaxis={'title': "Ages"},
                                yaxis={'title': "Indicator Figures (Total Figures for Year)"},
                                height=1200,
                                hovermode="closest"
@@ -642,7 +512,7 @@ dcc.Graph(  # two csv files + bar charts
             id='east_england_graph',
             figure={
                 'data': [
-                    {'x': east_england_data["Year"],
+                    {'x': east_england_data["Age"],
                      'y': east_england_data["IndicatorFigures"], 'type': 'bar',
                      'text': east_england_data["AreaName"],
                      'textposition': "inside",
@@ -652,7 +522,7 @@ dcc.Graph(  # two csv files + bar charts
                      }
                 ],
                 'layout': dict(title='East of England Younger People Data', autosize=True, barmode="group",
-                               xaxis={'title': "Years"},
+                               xaxis={'title': "Ages"},
                                yaxis={'title': "Indicator Figures (Total Figures for Year)"},
                                height=1500,
                                hovermode="closest")
@@ -701,9 +571,9 @@ dcc.Graph(  # two csv files + bar charts
             id='london_graph',
             figure={
                 'data': [
-                    {'x': london_data["Year"],
+                    {'x': london_data["Age"],
                      'y': london_data["IndicatorFigures"], 'type': 'bar',
-                     'text': london_data["AreaName"],
+                    'text': london_data["AreaName"],
                      'textposition': "inside",
                      'hovertext': london_data["IndicatorName"],
                      'opacity': 0.8,
@@ -711,10 +581,10 @@ dcc.Graph(  # two csv files + bar charts
                      }
                 ],
                 'layout': dict(title='London Younger People Data', autosize=True,
-                               xaxis={'title': "Years"},
-                               yaxis={'title': "Indicator Figures (Total Figures for Year)",
-                                      'dtick': 100}, #  how many ticks per axis in this case Y.
-                               height=2500,
+                               xaxis={'title': "Ages"},
+                               yaxis={'title': "Indicator Figures",
+                                      'dtick': 200}, #  how many ticks per axis in this case Y.
+                               height=3500,
                                hovermode="closest")
             }
         ),
@@ -756,7 +626,7 @@ dcc.Graph(  # two csv files + bar charts
             id='ne_graph',
             figure={
                 'data': [
-                    {'x': ne_data["Year"],
+                    {'x': ne_data["Age"],
                      'y': ne_data["IndicatorFigures"], 'type': 'bar',
                      'text': ne_data["AreaName"],
                      'textposition': "inside",
@@ -766,7 +636,7 @@ dcc.Graph(  # two csv files + bar charts
                      }
                 ],
                 'layout': dict(title='North East England Younger People Data', autosize=True,
-                               xaxis={'title': "Years"},
+                               xaxis={'title': "Ages"},
                                yaxis={'title': "Indicator Figures (Total Figures for Year)"},
                                hovermode="closest",
                                height=1500
@@ -809,7 +679,7 @@ dcc.Graph(  # two csv files + bar charts
             id='nw_graph',
             figure={
                 'data': [
-                    {'x': nw_data["Year"],
+                    {'x': nw_data["Age"],
                      'y': nw_data["IndicatorFigures"], 'type': 'bar',
                      'text': nw_data["AreaName"],
                      'textposition': "inside",
@@ -819,7 +689,7 @@ dcc.Graph(  # two csv files + bar charts
                      }
                 ],
                 'layout': dict(title='North West England Younger People Data',autosize=True,
-                               xaxis={'title': "Years"},
+                               xaxis={'title': "Age"},
                                yaxis={'title': "Indicator Figures (Total Figures for Year)"},
                                height=2500,
                                hovermode="closest")
@@ -861,7 +731,7 @@ dcc.Graph(  # two csv files + bar charts
             id='se_graph',
             figure={
                 'data': [
-                    {'x': se_data["Year"],
+                    {'x': se_data["Age"],
                      'y': se_data["IndicatorFigures"], 'type': 'bar',
                      'text': se_data["AreaName"],
                      'textposition': "inside",
@@ -869,10 +739,12 @@ dcc.Graph(  # two csv files + bar charts
                      'opacity': 0.8,
                      'marker': dict(color="rgb(255,165,0)"
                                               ),
-                     }
+                     },
+
+
                 ],
                 'layout': dict(title='South East Younger People Data', autosize=True,
-                               xaxis={'title': "Years"},
+                               xaxis={'title': "Ages"},
                                yaxis={'title': "Indicator Figures (Total Figures for Year)"},
                                height=2500,
                                hovermode="closest")
@@ -913,7 +785,7 @@ dcc.Graph(  # two csv files + bar charts
             id='south_west_graph',
             figure={
                 'data': [
-                    {'x': sw_data["Year"],
+                    {'x': sw_data["Age"],
                      'y': sw_data["IndicatorFigures"], 'type': 'bar',
                      'text': sw_data["AreaName"],
                      'textposition': "inside",
@@ -923,7 +795,7 @@ dcc.Graph(  # two csv files + bar charts
                      }
                 ],
                 'layout': dict(title='South West Younger People Data', autosize=True,
-                               xaxis={'title': "Years"},
+                               xaxis={'title': "Ages"},
                                yaxis={'title': "Indicator Figures (Total Figures for Year)"},
                                height=1500,
                                hovermode="closest")
@@ -965,7 +837,7 @@ dcc.Graph(  # two csv files + bar charts
             id='west_mid_graph',
             figure={
                 'data': [
-                    {'x': west_mid_data["Year"],
+                    {'x': west_mid_data["Age"],
                      'y': west_mid_data["IndicatorFigures"], 'type': 'bar',
                      'text': west_mid_data["AreaName"],
                      'textposition': "inside",
@@ -975,7 +847,7 @@ dcc.Graph(  # two csv files + bar charts
                      }
                 ],
                 'layout': dict(title='West Midlands Younger People Data', autosize=True,
-                               xaxis={'title': "Years"},
+                               xaxis={'title': "Ages"},
                                yaxis={'title': "Indicator Figures (Total Figures for Year)"},
                                hovermode="closest",
                                height=1500)
@@ -1015,7 +887,7 @@ dcc.Graph(  # two csv files + bar charts
             id='yorkshire_graph',
             figure={
                 'data': [
-                    {'x': yorkshire_data["Year"],
+                    {'x': yorkshire_data["Age"],
                      'y': yorkshire_data["IndicatorFigures"], 'type': 'bar',
                      'text': yorkshire_data["AreaName"],
                      'textposition': "inside",
@@ -1024,8 +896,8 @@ dcc.Graph(  # two csv files + bar charts
                                               width=2),
                      }
                 ],
-                'layout': dict(title='Yorkshire Younger People Data', autosize=True,
-                               xaxis={'title': "Years"},
+                'layout': dict(title='Yorkshire Younger People Data',  autosize=True,
+                               xaxis={'title': "Ages"},
                                yaxis={'title': "Indicator Figures (Total Figures for Year)"},
                                height=1500,
                                hovermode="closest")
