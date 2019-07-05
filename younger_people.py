@@ -191,8 +191,8 @@ england_reg.columns = ["Region", "Year", "Figures"]
 #London Data
 london= london[london.AreaName  != "England"]
 
-london_data = london.groupby(["AreaName","IndicatorName", "Age"]).size().reset_index()
-london_data.columns = ["AreaName", "IndicatorName", "Age",  "IndicatorFigures"]
+london_data = london.groupby(["AreaName","IndicatorName", "Sex", "Age"]).size().reset_index()
+london_data.columns = ["AreaName", "IndicatorName", "Sex",  "Age",  "IndicatorFigures"]
 
 
 
@@ -206,7 +206,7 @@ east_mid_data.columns = ["IndicatorName", "Sex", "Age",  "AreaName", "IndicatorF
 #East England
 east_england = east_england[east_england!= "England"]
 east_england_data = east_england.groupby(["IndicatorName", "Sex", "Age",  "AreaName"]).size().reset_index()
-east_england_data.columns =  ["IndicatorName", "Sex","Age",  "AreaName", "IndicatorFigures"]
+east_england_data.columns =  ["IndicatorName", "Sex", "Age",  "AreaName", "IndicatorFigures"]
 
 
 
@@ -280,7 +280,7 @@ dcc.Graph(
                  'name': "Gross disposable Household Income ",
                  },
             ],
-            'layout': dict(title='England 2017 Gross Dispoable HouseHld income ',
+            'layout': dict(title='England 2017 Gross Disposable HouseHold income ',
                            autosize=True,
                            xaxis={'title': "Cities"},
                            yaxis={'title': "Amount of £ GDHI"},
@@ -460,7 +460,7 @@ dcc.Graph(
                      'y': east_mid_data["IndicatorFigures"], 'type': 'bar',
                      'text': east_mid_data["AreaName"],
                      'textposition': "inside",
-                     'hovertext': east_mid_data["IndicatorName"],
+                     'hovertext': "Indicator Name : "+ east_mid_data["IndicatorName"],
                      'opacity': 0.8,
                      'marker': dict(color="rgb(255,165,0)"
                                               ),
@@ -516,7 +516,7 @@ dcc.Graph(
                      'y': east_england_data["IndicatorFigures"], 'type': 'bar',
                      'text': east_england_data["AreaName"],
                      'textposition': "inside",
-                     'hovertext': east_england_data["IndicatorName"],
+                     'hovertext': "Indicator Name : "+ east_england_data["IndicatorName"],
                      'opacity': 0.8,
                      'marker': dict(color="rgb(255,165,0)"),
                      }
@@ -575,7 +575,7 @@ dcc.Graph(
                      'y': london_data["IndicatorFigures"], 'type': 'bar',
                     'text': london_data["AreaName"],
                      'textposition': "inside",
-                     'hovertext': london_data["IndicatorName"],
+                     'hovertext': "Indicator Name : "+ london_data["IndicatorName"],
                      'opacity': 0.8,
                      'marker': dict(color="rgb(255,165,0)"),
                      }
@@ -630,7 +630,7 @@ dcc.Graph(
                      'y': ne_data["IndicatorFigures"], 'type': 'bar',
                      'text': ne_data["AreaName"],
                      'textposition': "inside",
-                     'hovertext': ne_data["IndicatorName"],
+                     'hovertext': "Indicator Name : "+ ne_data["IndicatorName"],
                      'opacity': 0.8,
                      'marker': dict(color="rgb(255,165,0)"),
                      }
@@ -683,7 +683,7 @@ dcc.Graph(
                      'y': nw_data["IndicatorFigures"], 'type': 'bar',
                      'text': nw_data["AreaName"],
                      'textposition': "inside",
-                     'hovertext': nw_data["IndicatorName"],
+                     'hovertext': "Indicator Name : "+ nw_data["IndicatorName"],
                      'opacity': 0.8,
                      'marker': dict(color="rgb(255,165,0)"),
                      }
@@ -735,7 +735,7 @@ dcc.Graph(
                      'y': se_data["IndicatorFigures"], 'type': 'bar',
                      'text': se_data["AreaName"],
                      'textposition': "inside",
-                     'hovertext': se_data["IndicatorName"],
+                     'hovertext': "Indicator Name : "+ se_data["IndicatorName"],
                      'opacity': 0.8,
                      'marker': dict(color="rgb(255,165,0)"
                                               ),
@@ -789,7 +789,7 @@ dcc.Graph(
                      'y': sw_data["IndicatorFigures"], 'type': 'bar',
                      'text': sw_data["AreaName"],
                      'textposition': "inside",
-                     'hovertext': sw_data["IndicatorName"],
+                     'hovertext': "Indicator Name : "+ sw_data["IndicatorName"],
                      'opacity': 0.8,
                      'marker': dict(color="rgb(255,165,0)"),
                      }
@@ -841,7 +841,7 @@ dcc.Graph(
                      'y': west_mid_data["IndicatorFigures"], 'type': 'bar',
                      'text': west_mid_data["AreaName"],
                      'textposition': "inside",
-                     'hovertext': west_mid_data["IndicatorName"],
+                     'hovertext': "Indicator Name : "+ west_mid_data["IndicatorName"],
                      'opacity': 0.8,
                      'marker': dict(color="rgb(255,165,0)"),
                      }
@@ -891,7 +891,7 @@ dcc.Graph(
                      'y': yorkshire_data["IndicatorFigures"], 'type': 'bar',
                      'text': yorkshire_data["AreaName"],
                      'textposition': "inside",
-                     'hovertext': yorkshire_data["IndicatorName"],
+                     'hovertext': "Indicator Name : "+ yorkshire_data["IndicatorName"],
                      'marker': dict(color="rgb(255,165,0)",
                                               width=2),
                      }
