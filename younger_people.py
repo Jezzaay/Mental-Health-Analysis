@@ -16,6 +16,7 @@ import plotly.tools as tls
 
 from app import  app
 from gdhi_file import gdhi
+from house_prices import houseprices
 
 
 #import csv
