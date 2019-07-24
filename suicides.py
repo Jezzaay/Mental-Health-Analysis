@@ -15,8 +15,7 @@ from plotly.tools import mpl_to_plotly
 
 from app import  app
 from gdhi_file import gdhi
-from house_prices import houseprices
-
+from house_prices import  houseprices_suicides
 
 #import csv
 london = pd.read_csv('data/suicides/indicators-CountyUA.data london.csv')
@@ -244,10 +243,10 @@ suicides_layout = html.Div([
                  'name': "Gross disposable Household Income ",
                  },
                 {
-                  'x': houseprices["regionname"],
-                  'y':houseprices["averageprice"],
+                  'x': houseprices_suicides["regionname"],
+                  'y': houseprices_suicides["averageprice"],
                     'type':'bar',
-                    'hovertext': houseprices["regionname"],
+                    'hovertext': houseprices_suicides["regionname"],
                     'name':"2017 House Prices for England"
                 },
             ],

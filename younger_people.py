@@ -16,9 +16,7 @@ import plotly.tools as tls
 
 from app import  app
 from gdhi_file import gdhi
-from house_prices import houseprices
-
-
+from house_prices import  houseprices_younger
 #import csv
 london = pd.read_csv('data/children & Younger people/indicators-CountyUA.data london young people.csv')
 east_mid = pd.read_csv("data/children & Younger people/indicators-CountyUA.data east mid.csv")
@@ -281,10 +279,10 @@ dcc.Graph(
                  'name': "Gross disposable Household Income ",
                  },
                 {
-                  'x': houseprices["regionname"],
-                  'y':houseprices["averageprice"],
+                  'x': houseprices_younger["regionname"],
+                  'y':houseprices_younger["averageprice"],
                     'type':'bar',
-                    'hovertext': houseprices["regionname"],
+                    'hovertext': houseprices_younger["regionname"],
                     'name':"2017 House Prices for England"
                 },
             ],
