@@ -481,6 +481,20 @@ dcc.Graph(
             }
         ),
 
+        dcc.Graph(id='eastmid_pie',
+                  figure={
+                      'data': [go.Pie(labels=east_mid_data["Age"],
+                                      values=east_mid_data["IndicatorFigures"],
+                                      marker=dict(line=dict(color='#fff', width=1)),
+                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      domain={'x': [0, .75], 'y': [0, 1]}
+                                      )
+                               ],
+                      'layout': go.Layout(title='East Midlands Young People Plot',
+                                          autosize=True, height=500
+                                          )
+                  }),
+
         html.Br(),
 
     ]),
@@ -534,6 +548,20 @@ dcc.Graph(
                                hovermode="closest")
             }
         ),
+
+        dcc.Graph(id='eastengland_pie',
+                  figure={
+                      'data': [go.Pie(labels=east_england_data["Age"],
+                                      values=east_england_data["IndicatorFigures"],
+                                      marker=dict(line=dict(color='#fff', width=1)),
+                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      domain={'x': [0, .75], 'y': [0, 1]}
+                                      )
+                               ],
+                      'layout': go.Layout(title='East of England Young People Plot',
+                                          autosize=True, height=500
+                                          )
+                  }),
 
     ]),
 
@@ -595,6 +623,20 @@ dcc.Graph(
             }
         ),
 
+        dcc.Graph(id='london_pie',
+                  figure={
+                      'data': [go.Pie(labels=london_data["Age"],
+                                      values=london_data["IndicatorFigures"],
+                                      marker=dict(line=dict(color='#fff', width=1)),
+                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      domain={'x': [0, .75], 'y': [0, 1]}
+                                      )
+                               ],
+                      'layout': go.Layout(title='London Young People Plot',
+                                          autosize=True, height=500
+                                          )
+                  }),
+
         html.Div(id="london_container")
     ]),
 
@@ -650,6 +692,20 @@ dcc.Graph(
             }
         ),
 
+        dcc.Graph(id='ne_pie',
+                  figure={
+                      'data': [go.Pie(labels=ne_data["Age"],
+                                      values=ne_data["IndicatorFigures"],
+                                      marker=dict(line=dict(color='#fff', width=1)),
+                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      domain={'x': [0, .75], 'y': [0, 1]}
+                                      )
+                               ],
+                      'layout': go.Layout(title='North East Young People Plot',
+                                          autosize=True, height=500
+                                          )
+                  }),
+
     ]),
 
     html.Details([
@@ -701,6 +757,20 @@ dcc.Graph(
                                hovermode="closest")
             }
         ),
+
+        dcc.Graph(id='nw_pie',
+                  figure={
+                      'data': [go.Pie(labels=nw_data["Age"],
+                                      values=nw_data["IndicatorFigures"],
+                                      marker=dict(line=dict(color='#fff', width=1)),
+                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      domain={'x': [0, .75], 'y': [0, 1]}
+                                      )
+                               ],
+                      'layout': go.Layout(title='North West Young People Plot',
+                                          autosize=True, height=500
+                                          )
+                  }),
 
     ]),
 
@@ -757,6 +827,20 @@ dcc.Graph(
             }
         ),
 
+        dcc.Graph(id='se_pie',
+                  figure={
+                      'data': [go.Pie(labels=se_data["Age"],
+                                      values=se_data["IndicatorFigures"],
+                                      marker=dict(line=dict(color='#fff', width=1)),
+                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      domain={'x': [0, .75], 'y': [0, 1]}
+                                      )
+                               ],
+                      'layout': go.Layout(title='South East  Young People Plot',
+                                          autosize=True, height=500
+                                          )
+                  }),
+
     ]),
 
     html.Details([
@@ -807,6 +891,20 @@ dcc.Graph(
                                hovermode="closest")
             }
         ),
+
+        dcc.Graph(id='sw_pie',
+                  figure={
+                      'data': [go.Pie(labels=sw_data["Age"],
+                                      values=sw_data["IndicatorFigures"],
+                                      marker=dict(line=dict(color='#fff', width=1)),
+                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      domain={'x': [0, .75], 'y': [0, 1]}
+                                      )
+                               ],
+                      'layout': go.Layout(title='South West Young People Plot',
+                                          autosize=True, height=500
+                                          )
+                  }),
 
     ]),
 
@@ -860,6 +958,20 @@ dcc.Graph(
             }
         ),
 
+        dcc.Graph(id='westmidlands_pie',
+                  figure={
+                      'data': [go.Pie(labels=west_mid_data["Age"],
+                                      values=west_mid_data["IndicatorFigures"],
+                                      marker=dict(line=dict(color='#fff', width=1)),
+                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      domain={'x': [0, .75], 'y': [0, 1]}
+                                      )
+                               ],
+                      'layout': go.Layout(title='West Midlands Young People Plot',
+                                          autosize=True, height=500
+                                          )
+                  }),
+
     ]),
 
     html.Details([
@@ -909,6 +1021,20 @@ dcc.Graph(
                                hovermode="closest")
             }
         ),
+
+        dcc.Graph(id='york_pie',
+                  figure={
+                      'data': [go.Pie(labels=yorkshire_data["Age"],
+                                      values=yorkshire_data["IndicatorFigures"],
+                                      marker=dict(line=dict(color='#fff', width=1)),
+                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      domain={'x': [0, .75], 'y': [0, 1]}
+                                      )
+                               ],
+                      'layout': go.Layout(title='Yorkshire Young People Plot',
+                                          autosize=True, height=500
+                                          )
+                  }),
 
     ]),
 
