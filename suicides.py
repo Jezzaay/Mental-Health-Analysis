@@ -326,7 +326,7 @@ suicides_layout = html.Div([
                                        barmode="stack",
                                        xaxis={'title': "Years"},
                                        yaxis={'title': "Indicator Figures (Total Figures for Year)",
-                                              'range': [0, 400]},
+                                              'range': [0, 300]},
                                        height=2500,
                                        hovermode="closest"
                                        )
@@ -354,7 +354,7 @@ suicides_layout = html.Div([
                                        barmode="stack",
                                        xaxis={'title': "Years"},
                                        yaxis={'title': "Indicator Figures (Total Figures for Year)",
-                                              'range': [0, 500]},
+                                              'range': [0, 400]},
                                        height=2500,
                                        hovermode="closest"
                                        )
@@ -383,7 +383,7 @@ suicides_layout = html.Div([
                                        barmode="stack",
                                        xaxis={'title': "Years"},
                                        yaxis={'title': "Indicator Figures (Total Figures for Year)",
-                                              'range': [0, 500]},
+                                              'range': [0, 400]},
                                        height=2500,
                                        hovermode="closest"
                                        )
@@ -449,6 +449,20 @@ suicides_layout = html.Div([
             }
         ),
 
+        dcc.Graph(id='east_mid_pie',
+                  figure={
+                      'data': [go.Pie(labels=east_mid_data["Age"],
+                                      values=east_mid_data["IndicatorFigures"],
+                                      marker=dict(line=dict(color='#fff', width=1)),
+                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      domain={'x': [0, .75], 'y': [0, 1]}
+                                      )
+                               ],
+                      'layout': go.Layout(title='East Midlands Suicide Plot',
+                                          autosize=True, height=500
+                                          )
+                  }),
+
         html.Br(),
     ]),
 
@@ -500,6 +514,44 @@ suicides_layout = html.Div([
                                hovermode="closest")
             }
         ),
+
+        dcc.Graph(
+            id='east_england_pie',
+            figure={
+                'data': [
+                    {'x': east_england_data["Age"],
+                     'y': east_england_data["IndicatorFigures"],
+                     'text': east_england_data["AreaName"],
+                     'textposition': "inside",
+                     'type': 'pie',
+                     'hovertext': "Indicator Name : " + east_england_data["IndicatorName"] + "<br>" + "Sex:" +
+                                  east_england_data["Sex"],
+                     'opacity': 0.8,
+                     'marker': dict(color="rgb(255,165,0)"),
+                     }
+                ],
+                'layout': dict(title='East of England Suicide Data', autosize=True, barmode="group",
+                               xaxis={'title': "Ages"},
+                               yaxis={'title': "Indicator Figures (Total Figures for Year)"},
+                               height=1500,
+                               hovermode="closest")
+            }
+        ),
+
+        dcc.Graph(id='east_england_pie',
+                  figure={
+                      'data': [go.Pie(labels=east_england_data["Age"],
+                                      values=east_england_data["IndicatorFigures"],
+                                      marker=dict(line=dict(color='#fff', width=1)),
+                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      domain={'x': [0, .75], 'y': [0,1]}
+                                      )
+                               ],
+                      'layout': go.Layout(title='East of England Suicide Data',
+                                          autosize=True, height = 500
+                                          )
+                  }),
+
     ]),
 
     html.Details([
@@ -554,6 +606,20 @@ suicides_layout = html.Div([
                                hovermode="closest")
             }
         ),
+
+        dcc.Graph(id='london_pie',
+                  figure={
+                      'data': [go.Pie(labels=london_data["Age"],
+                                      values=london_data["IndicatorFigures"],
+                                      marker=dict(line=dict(color='#fff', width=1)),
+                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      domain={'x': [0, .75], 'y': [0, 1]}
+                                      )
+                               ],
+                      'layout': go.Layout(title='London Suicide Plot',
+                                          autosize=True, height=500
+                                          )
+                  }),
 
 
 
@@ -619,6 +685,19 @@ suicides_layout = html.Div([
             }
         ),
 
+        dcc.Graph(id='ne_pie',
+                  figure={
+                      'data': [go.Pie(labels=ne_data["Age"],
+                                      values=ne_data["IndicatorFigures"],
+                                      marker=dict(line=dict(color='#fff', width=1)),
+                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      domain={'x': [0, .75], 'y': [0, 1]}
+                                      )
+                               ],
+                      'layout': go.Layout(title='North East Suicide Plot',
+                                          autosize=True, height=500
+                                          )
+                  }),
 
     ]),
 
@@ -674,6 +753,20 @@ suicides_layout = html.Div([
                                hovermode="closest")
             }
         ),
+
+        dcc.Graph(id='nw_pie',
+                  figure={
+                      'data': [go.Pie(labels=nw_data["Age"],
+                                      values=nw_data["IndicatorFigures"],
+                                      marker=dict(line=dict(color='#fff', width=1)),
+                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      domain={'x': [0, .75], 'y': [0, 1]}
+                                      )
+                               ],
+                      'layout': go.Layout(title='North West Suicide Plot',
+                                          autosize=True, height=500
+                                          )
+                  }),
     ]),
 
 
@@ -727,6 +820,20 @@ suicides_layout = html.Div([
                                hovermode="closest")
             }
         ),
+
+        dcc.Graph(id='se_pie',
+                  figure={
+                      'data': [go.Pie(labels=se_data["Age"],
+                                      values=se_data["IndicatorFigures"],
+                                      marker=dict(line=dict(color='#fff', width=1)),
+                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      domain={'x': [0, .75], 'y': [0, 1]}
+                                      )
+                               ],
+                      'layout': go.Layout(title='South East Suicide Plot',
+                                          autosize=True, height=500
+                                          )
+                  }),
     ]),
 
     html.Details([
@@ -777,6 +884,22 @@ suicides_layout = html.Div([
                                hovermode="closest")
             }
         ),
+
+        dcc.Graph(id='sw_pie',
+                  figure={
+                      'data': [go.Pie(labels=sw_data["Age"],
+                                      values=sw_data["IndicatorFigures"],
+                                      marker=dict(line=dict(color='#fff', width=1)),
+                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      domain={'x': [0, .75], 'y': [0, 1]}
+                                      )
+                               ],
+                      'layout': go.Layout(title='South West Suicide Plot',
+                                          autosize=True, height=500
+                                          )
+                  }),
+
+
     ]),
 
         html.Details([
@@ -829,6 +952,20 @@ suicides_layout = html.Div([
                 }
             ),
 
+            dcc.Graph(id='westmid_pie',
+                      figure={
+                          'data': [go.Pie(labels=west_mid_data["Age"],
+                                          values=west_mid_data["IndicatorFigures"],
+                                          marker=dict(line=dict(color='#fff', width=1)),
+                                          hoverinfo='label+ value+percent', textinfo='value',
+                                          domain={'x': [0, .75], 'y': [0, 1]}
+                                          )
+                                   ],
+                          'layout': go.Layout(title='West Midlands Suicide Plot',
+                                              autosize=True, height=500
+                                              )
+                      }),
+
         ]),
     html.Details([
         html.Summary("Yorkshire & The Humber Details"),
@@ -877,6 +1014,20 @@ suicides_layout = html.Div([
                                hovermode="closest")
             }
         ),
+
+        dcc.Graph(id='york_pie',
+                  figure={
+                      'data': [go.Pie(labels=yorkshire_data["Age"],
+                                      values=yorkshire_data["IndicatorFigures"],
+                                      marker=dict(line=dict(color='#fff', width=1)),
+                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      domain={'x': [0, .75], 'y': [0, 1]}
+                                      )
+                               ],
+                      'layout': go.Layout(title='South West Suicide Plot',
+                                          autosize=True, height=500
+                                          )
+                  }),
 
     ]),
         html.Div(id='suicides-content'),
