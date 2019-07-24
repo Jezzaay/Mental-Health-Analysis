@@ -467,8 +467,3 @@ houseprices_suicides = houseprices[~houseprices.regionname.str.contains("North")
 
 
 
-
-
-#print(houseprices)
-print(houseprices.head)
-
