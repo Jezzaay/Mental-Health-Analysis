@@ -17,6 +17,8 @@ import plotly.tools as tls
 from app import  app
 from gdhi_file import gdhi
 from house_prices import  houseprices_younger
+
+
 #import csv
 london = pd.read_csv('data/children & Younger people/indicators-CountyUA.data london young people.csv')
 east_mid = pd.read_csv("data/children & Younger people/indicators-CountyUA.data east mid.csv")
@@ -56,9 +58,13 @@ yorkshire = yorkshire.drop(tables_to_drop, axis = 1)
 
 #Clearing data which is not cities
 east_mid = east_mid[~east_mid.AreaName.str.contains("East") &
-                            ~east_mid.AreaName.str.contains("shire")]
+                    ~east_mid.Age.str.contains("Primary") &
+
+                    ~east_mid.AreaName.str.contains("shire")]
 
 east_england = east_england[~east_england.AreaName.str.contains("East") &
+                            ~east_england.Age.str.contains("Primary") &
+
                             ~east_england.AreaName.str.contains("shire")]
 
 london = london[~london.AreaName.str.contains("East") &
@@ -71,7 +77,7 @@ london = london[~london.AreaName.str.contains("East") &
                             ~london.Age.str.contains("15 yrs")&
                             ~london.Age.str.contains("<")&
                             ~london.Age.str.contains("5 yrs")&
-                            ~london.Age.str.contains("5-15")&
+                            ~london.Age.str.contains("Primary")&
                             ~london.Age.str.contains("Secondary")&
                             ~london.Age.str.contains("15-19")&
                             ~london.Age.str.contains("10-17")&
@@ -83,12 +89,16 @@ london = london[~london.AreaName.str.contains("East") &
 north_east = north_east[~north_east.AreaName.str.contains("North") &
                         ~north_east.AreaName.str.contains("South") &
                             ~north_east.AreaName.str.contains("shire")&
+                        ~north_east.Age.str.contains("Primary") &
+
                         ~north_east.AreaName.str.contains("County") ]
 
 
 north_west = north_west[~north_west.AreaName.str.contains("North") &
                         ~north_west.AreaName.str.contains("South") &
                             ~north_west.AreaName.str.contains("shire")&
+                        ~north_west.Age.str.contains("Primary") &
+
                         ~north_west.AreaName.str.contains("East") ]
 
 
@@ -96,6 +106,8 @@ south_west = south_west[~south_west.AreaName.str.contains("North") &
                         ~south_west.AreaName.str.contains("South") &
                             ~south_west.AreaName.str.contains("shire")&
                         ~south_west.AreaName.str.contains("East") &
+                        ~south_west.Age.str.contains("Primary") &
+
                         ~south_west.AreaName.str.contains("England") ]
 
 
@@ -104,6 +116,8 @@ south_east = south_east[~south_east.AreaName.str.contains("North") &
                             ~south_east.AreaName.str.contains("shire")&
                         ~south_east.AreaName.str.contains("East") &
                         ~south_east.AreaName.str.contains("England")&
+                        ~south_east.Age.str.contains("Primary") &
+
                         ~south_east.AreaName.str.contains("West")]
 
 west_midlands = west_midlands[~west_midlands.AreaName.str.contains("North") &
@@ -111,14 +125,18 @@ west_midlands = west_midlands[~west_midlands.AreaName.str.contains("North") &
                             ~west_midlands.AreaName.str.contains("shire")&
                         ~west_midlands.AreaName.str.contains("East") &
                         ~west_midlands.AreaName.str.contains("England")&
-                        ~west_midlands.AreaName.str.contains("West")]
+                              ~west_midlands.Age.str.contains("Primary") &
+
+                              ~west_midlands.AreaName.str.contains("West")]
 
 yorkshire = yorkshire[~yorkshire.AreaName.str.contains("North") &
                         ~yorkshire.AreaName.str.contains("South") &
                             ~yorkshire.AreaName.str.contains("shire")&
                         ~yorkshire.AreaName.str.contains("East") &
                         ~yorkshire.AreaName.str.contains("England")&
-                        ~yorkshire.AreaName.str.contains("West")]
+                      ~yorkshire.Age.str.contains("Primary") &
+
+                      ~yorkshire.AreaName.str.contains("West")]
 
 
 

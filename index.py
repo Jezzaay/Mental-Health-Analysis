@@ -4,7 +4,7 @@ from dash.dependencies import Input, Output
 from app import app
 import younger_people, suicides, home, error # Importing Other pages for the nav page.
 import dash_bootstrap_components as dbc
-
+import prediction_younger_people
 
 #Navigation Bar.
 navbar = dbc.NavbarSimple(
