@@ -100,11 +100,11 @@ rmse = (np.sqrt(mean_squared_error(eng_Y_train, se_y_train_pred)))
 r2 = r2_score(eng_Y_train, se_y_train_pred)
 
 
-print("The model performance for training set -  England Without London  ")
+#print("The model performance for training set -  England Without London  ")
 #print("--------------------------------------")
-print('RMSE is {}'.format(rmse))
-print('R2 score is {}'.format(r2))
-print("\n")
+#print('RMSE is {}'.format(rmse))
+#print('R2 score is {}'.format(r2))
+#print("\n")
 
 
 eng_Y_test_pred = linear_model.predict(eng_X_test)
@@ -153,11 +153,11 @@ rmse = (np.sqrt(mean_squared_error(se_Y_train, se_y_train_pred)))
 r2 = r2_score(se_Y_train, se_y_train_pred)
 
 
-print("The model performance for training set -  South East ")
+#print("The model performance for training set -  South East ")
 #print("--------------------------------------")
-print('RMSE is {}'.format(rmse))
-print('R2 score is {}'.format(r2))
-print("\n")
+#print('RMSE is {}'.format(rmse))
+#print('R2 score is {}'.format(r2))
+#print("\n")
 
 
 se_Y_test_pred = linear_model.predict(se_X_test)
@@ -204,11 +204,11 @@ rmse = (np.sqrt(mean_squared_error(sw_Y_train, sw_y_train_pred)))
 r2 = r2_score(sw_Y_train, sw_y_train_pred)
 
 
-print("The model performance for training set -  South West ")
+#print("The model performance for training set -  South West ")
 #print("--------------------------------------")
-print('RMSE is {}'.format(rmse))
-print('R2 score is {}'.format(r2))
-print("\n")
+#print('RMSE is {}'.format(rmse))
+#print('R2 score is {}'.format(r2))
+#print("\n")
 
 
 sw_Y_test_pred = linear_model.predict(sw_X_test)
@@ -255,11 +255,11 @@ rmse = (np.sqrt(mean_squared_error(nw_Y_train, nw_y_train_pred)))
 r2 = r2_score(nw_Y_train, nw_y_train_pred)
 
 
-print("The model performance for training set -  North West ")
+#print("The model performance for training set -  North West ")
 #print("--------------------------------------")
-print('RMSE is {}'.format(rmse))
-print('R2 score is {}'.format(r2))
-print("\n")
+#print('RMSE is {}'.format(rmse))
+#print('R2 score is {}'.format(r2))
+#print("\n")
 
 
 nw_Y_test_pred = linear_model.predict(nw_X_test)
@@ -270,6 +270,213 @@ r2 = r2_score(nw_Y_test, nw_Y_test_pred)  #  R squared explained variation / tot
 #print(lnd_Y_test_pred)
 
 print("The model performance for testing set - North West ")
+print("--------------------------------------")
+print('RMSE is {}'.format(rmse))
+print('R2 score is {}'.format(r2))
+print("\n")
+
+# ------- NORTH EAST   --------
+
+ne = younger_people.ne_data
+ne = ne.drop(drop, axis=1)
+ne["Age"] = ne['Age'].str.replace(r"-","")
+ne["Age"] = ne['Age'].str.replace(r"+","")
+ne["Age"] = ne['Age'].str.replace(r" yrs","")
+ne["Age"] = ne["Age"].astype(float) # pd.to_numeric(lnd["Age"], errors="ignore")
+#print(se)
+x_ne = ne["Age"]
+y_ne = ne["IndicatorFigures"]
+
+
+#turn 1D array into 2D array
+# call preprocessor for StandardScaler to reshape a Series Object
+scaler = preprocessing.StandardScaler()
+x_ne = scaler.fit_transform(x_ne.values.reshape(-1,1))
+y_ne = scaler.fit_transform(y_ne.values.reshape(-1,1))
+
+
+ne_X_train, ne_X_test, ne_Y_train, ne_Y_test = train_test_split(x_ne, y_ne, test_size=.2, random_state=6)
+
+
+linear_model = LinearRegression()
+linear_model.fit(ne_X_train, ne_Y_train)
+
+ne_y_train_pred = linear_model.predict(ne_X_train)
+rmse = (np.sqrt(mean_squared_error(ne_Y_train, ne_y_train_pred)))
+r2 = r2_score(ne_Y_train, ne_y_train_pred)
+
+
+#print("The model performance for training set -  North East ")
+#print("--------------------------------------")
+#print('RMSE is {}'.format(rmse))
+#print('R2 score is {}'.format(r2))
+#print("\n")
+
+
+ne_Y_test_pred = linear_model.predict(ne_X_test)
+rmse = (np.sqrt(mean_squared_error(ne_Y_test, ne_Y_test_pred))) # Root mean squared Error
+r2 = r2_score(ne_Y_test, ne_Y_test_pred)  #  R squared explained variation / total variation
+
+#'print(se_Y_test)
+#print(lnd_Y_test_pred)
+
+print("The model performance for testing set - North East ")
+print("--------------------------------------")
+print('RMSE is {}'.format(rmse))
+print('R2 score is {}'.format(r2))
+print("\n")
+
+
+
+# -------  EAST  OF ENGLAND  --------
+
+ee = younger_people.east_england_data
+ee = ee.drop(drop, axis=1)
+ee["Age"] = ee['Age'].str.replace(r"-","")
+ee["Age"] = ee['Age'].str.replace(r"+","")
+ee["Age"] = ee['Age'].str.replace(r" yrs","")
+ee["Age"] = ee["Age"].astype(float) # pd.to_numeric(lnd["Age"], errors="ignore")
+#print(se)
+x_ee = ee["Age"]
+y_ee = ee["IndicatorFigures"]
+
+
+#turn 1D array into 2D array
+# call preprocessor for StandardScaler to reshape a Series Object
+scaler = preprocessing.StandardScaler()
+x_ee = scaler.fit_transform(x_ee.values.reshape(-1,1))
+y_ee = scaler.fit_transform(y_ee.values.reshape(-1,1))
+
+
+ee_X_train, ee_X_test, ee_Y_train, ee_Y_test = train_test_split(x_ee, y_ee, test_size=.2, random_state=5)
+
+
+linear_model = LinearRegression()
+linear_model.fit(ee_X_train, ee_Y_train)
+
+ee_y_train_pred = linear_model.predict(ee_X_train)
+rmse = (np.sqrt(mean_squared_error(ee_Y_train, ee_y_train_pred)))
+r2 = r2_score(ee_Y_train, ee_y_train_pred)
+
+
+#print("The model performance for training set -   East of England ")
+#print("--------------------------------------")
+#print('RMSE is {}'.format(rmse))
+#print('R2 score is {}'.format(r2))
+#print("\n")
+
+
+ee_Y_test_pred = linear_model.predict(ee_X_test)
+rmse = (np.sqrt(mean_squared_error(ee_Y_test, ee_Y_test_pred))) # Root mean squared Error
+r2 = r2_score(ee_Y_test, ee_Y_test_pred)  #  R squared explained variation / total variation
+
+#'print(se_Y_test)
+#print(lnd_Y_test_pred)
+
+print("The model performance for testing set -  East  of England ")
+print("--------------------------------------")
+print('RMSE is {}'.format(rmse))
+print('R2 score is {}'.format(r2))
+print("\n")
+
+
+# -------  EAST  OF ENGLAND  --------
+
+emid = younger_people.east_mid_data
+emid = emid.drop(drop, axis=1)
+emid["Age"] = emid['Age'].str.replace(r"-","")
+emid["Age"] = emid['Age'].str.replace(r"+","")
+emid["Age"] = emid['Age'].str.replace(r" yrs","")
+emid["Age"] = emid["Age"].astype(float) # pd.to_numeric(lnd["Age"], errors="ignore")
+#print(se)
+x_emid = emid["Age"]
+y_emid = emid["IndicatorFigures"]
+
+
+#turn 1D array into 2D array
+# call preprocessor for StandardScaler to reshape a Series Object
+scaler = preprocessing.StandardScaler()
+x_emid= scaler.fit_transform(x_emid.values.reshape(-1,1))
+y_emid = scaler.fit_transform(y_emid.values.reshape(-1,1))
+
+
+emid_X_train, emid_X_test, emid_Y_train, emid_Y_test = train_test_split(x_emid, y_emid, test_size=.2, random_state=5)
+
+
+linear_model = LinearRegression()
+linear_model.fit(emid_X_train, emid_Y_train)
+
+emid_y_train_pred = linear_model.predict(emid_X_train)
+rmse = (np.sqrt(mean_squared_error(emid_Y_train, emid_y_train_pred)))
+r2 = r2_score(emid_Y_train, emid_y_train_pred)
+
+
+#print("The model performance for training set -   East Midlands ")
+#print("--------------------------------------")
+#print('RMSE is {}'.format(rmse))
+#print('R2 score is {}'.format(r2))
+#print("\n")
+
+
+emid_Y_test_pred = linear_model.predict(emid_X_test)
+rmse = (np.sqrt(mean_squared_error(emid_Y_test, emid_Y_test_pred))) # Root mean squared Error
+r2 = r2_score(emid_Y_test, emid_Y_test_pred)  #  R squared explained variation / total variation
+
+#'print(se_Y_test)
+#print(lnd_Y_test_pred)
+
+print("The model performance for testing set -  East Midlands ")
+print("--------------------------------------")
+print('RMSE is {}'.format(rmse))
+print('R2 score is {}'.format(r2))
+print("\n")
+
+# -------  YORKSHIRE  --------
+
+york = younger_people.yorkshire_data
+york = york.drop(drop, axis=1)
+york["Age"] = york['Age'].str.replace(r"-","")
+york["Age"] = york['Age'].str.replace(r"+","")
+york["Age"] = york['Age'].str.replace(r" yrs","")
+york["Age"] = york["Age"].astype(float) # pd.to_numeric(lnd["Age"], errors="ignore")
+#print(se)
+x_york= york["Age"]
+y_york= york["IndicatorFigures"]
+
+
+#turn 1D array into 2D array
+# call preprocessor for StandardScaler to reshape a Series Object
+scaler = preprocessing.StandardScaler()
+x_york= scaler.fit_transform(x_york.values.reshape(-1,1))
+y_york= scaler.fit_transform(y_york.values.reshape(-1,1))
+
+
+york_X_train, york_X_test, york_Y_train, york_Y_test = train_test_split(x_york, y_york, test_size=.2, random_state=5)
+
+
+linear_model = LinearRegression()
+linear_model.fit(york_X_train, york_Y_train)
+
+york_y_train_pred = linear_model.predict(york_X_train)
+rmse = (np.sqrt(mean_squared_error(york_Y_train, york_y_train_pred)))
+r2 = r2_score(york_Y_train, york_y_train_pred)
+
+
+#print("The model performance for training set -   Yorkshire ")
+#print("--------------------------------------")
+#print('RMSE is {}'.format(rmse))
+#print('R2 score is {}'.format(r2))
+#print("\n")
+
+
+york_Y_test_pred = linear_model.predict(york_X_test)
+rmse = (np.sqrt(mean_squared_error(york_Y_test,york_Y_test_pred))) # Root mean squared Error
+r2 = r2_score(york_Y_test, york_Y_test_pred)  #  R squared explained variation / total variation
+
+#'print(se_Y_test)
+#print(lnd_Y_test_pred)
+
+print("The model performance for testing set -  Yorkshire ")
 print("--------------------------------------")
 print('RMSE is {}'.format(rmse))
 print('R2 score is {}'.format(r2))
