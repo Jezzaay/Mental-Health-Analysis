@@ -188,8 +188,8 @@ all.columns = ["Year", "Sex", "AreaName", "IndicatorFigures"]
 
 
 #England With London
-england = all_data.groupby(["IndicatorName", "Timeperiod", "ParentName"]).size().reset_index()
-england.columns = ["IndicatorName", "Year", "Region", "IndicatorFigures"]
+england = all_data.groupby(["IndicatorName", "Age", "Timeperiod", "ParentName"]).size().reset_index()
+england.columns = ["IndicatorName", "Age", "Year", "Region", "IndicatorFigures"]
 
 #England WO London
 eng_wo_london = [east_mid, east_england, north_east, north_west,

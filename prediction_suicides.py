@@ -1,4 +1,4 @@
-import  younger_people
+import  suicides
 import numpy as np
 from sklearn import preprocessing
 from sklearn.linear_model import LogisticRegression
@@ -17,10 +17,13 @@ import pandas as pd
 drop = ["AreaName", "IndicatorName", "Sex"]
 
 
+# As I have been encountering a RMSE and R2 score of 0.0 and 1.0 for all the training/test apart from the England W.o London
+
+
 # ------- LONDON --------
 
 
-lnd = younger_people.london_data
+lnd = suicides.london_data
 lnd = lnd.drop(drop, axis=1)
 lnd["Age"] = lnd['Age'].str.replace(r"-","")
 lnd["Age"] = lnd['Age'].str.replace(r"+","")
@@ -38,7 +41,7 @@ x_ld = scaler.fit_transform(x_ld.values.reshape(-1,1))
 y_ld = scaler.fit_transform(y_ld.values.reshape(-1,1))
 
 
-lnd_X_train, lnd_X_test, lnd_Y_train, lnd_Y_test = train_test_split(x_ld, y_ld, test_size=.2, random_state=6)
+lnd_X_train, lnd_X_test, lnd_Y_train, lnd_Y_test = train_test_split(x_ld, y_ld, test_size=.2, random_state=2)
 
 
 linear_model = LinearRegression()
@@ -49,7 +52,7 @@ rmse = (np.sqrt(mean_squared_error(lnd_Y_train, lnd_y_train_pred)))
 r2 = r2_score(lnd_Y_train, lnd_y_train_pred)
 
 
-#print("The model performance for training Set - Younger People - London ")
+#print("The model performance for training Set - Suicides - London ")
 #print("--------------------------------------")
 #print('RMSE is {}'.format(rmse))
 #print('R2 score is {}'.format(r2))
@@ -63,15 +66,15 @@ r2 = r2_score(lnd_Y_test, lnd_Y_test_pred)  #  R squared explained variation / t
 #print(lnd_Y_test)
 #print(lnd_Y_test_pred)
 
-print("The model performance for testing Set - Younger People - London ")
-print("--------------------------------------")
-print('RMSE is {}'.format(rmse))
-print('R2 score is {}'.format(r2))
-print("\n")
+#print("The model performance for testing Set - Suicides - London ")
+#print("--------------------------------------")
+#print('RMSE is {}'.format(rmse))
+#print('R2 score is {}'.format(r2))
+#print("\n")
 
 # ------- England With LND --------
 
-eng = younger_people.england
+eng = suicides.england
 #eng = eng.drop(drop, axis=1)
 eng["Age"] = eng['Age'].str.replace(r"-","")
 eng["Age"] = eng['Age'].str.replace(r"+","")
@@ -99,7 +102,7 @@ rmse = (np.sqrt(mean_squared_error(eng_Y_train, se_y_train_pred)))
 r2 = r2_score(eng_Y_train, se_y_train_pred)
 
 
-#print("The model performance for training Set - Younger People -  England With London  ")
+#print("The model performance for training Set - Suicides -  England With London  ")
 #print("--------------------------------------")
 #print('RMSE is {}'.format(rmse))
 #print('R2 score is {}'.format(r2))
@@ -113,15 +116,15 @@ r2 = r2_score(eng_Y_test, eng_Y_test_pred)  #  R squared explained variation / t
 #print(eng_Y_test)
 #print(lnd_Y_test_pred)
 
-print("The model performance for testing Set - Younger People - England With London ")
+print("The model performance for testing Set - Suicides - England With London ")
 print("--------------------------------------")
 print('RMSE is {}'.format(rmse))
 print('R2 score is {}'.format(r2))
 print("\n")
-5
+
 # ------- England W.O LND --------
 
-engwolnd = younger_people.england_wo_london
+engwolnd = suicides.england_wo_london
 #engwolnd = engwolnd.drop(drop, axis=1)
 engwolnd["Age"] = engwolnd['Age'].str.replace(r"-","")
 engwolnd["Age"] = engwolnd['Age'].str.replace(r"+","")
@@ -149,7 +152,7 @@ rmse = (np.sqrt(mean_squared_error(engwolnd_Y_train, se_y_train_pred)))
 r2 = r2_score(engwolnd_Y_train, se_y_train_pred)
 
 
-#print("The model performance for training Set - Younger People -  engwolndland Without London  ")
+#print("The model performance for training Set - Suicides -  engwolndland Without London  ")
 #print("--------------------------------------")
 #print('RMSE is {}'.format(rmse))
 #print('R2 score is {}'.format(r2))
@@ -163,7 +166,7 @@ r2 = r2_score(engwolnd_Y_test, engwolnd_Y_test_pred)  #  R squared explained var
 #print(engwolnd_Y_test)
 #print(lnd_Y_test_pred)
 
-print("The model performance for testing Set - Younger People - England Without London ")
+print("The model performance for testing Set - Suicides - England Without London ")
 print("--------------------------------------")
 print('RMSE is {}'.format(rmse))
 print('R2 score is {}'.format(r2))
@@ -173,7 +176,7 @@ print("\n")
 
 # ------- SOUTH EAST --------
 
-se = younger_people.se_data
+se = suicides.se_data
 se = se.drop(drop, axis=1)
 se["Age"] = se['Age'].str.replace(r"-","")
 se["Age"] = se['Age'].str.replace(r"+","")
@@ -202,7 +205,7 @@ rmse = (np.sqrt(mean_squared_error(se_Y_train, se_y_train_pred)))
 r2 = r2_score(se_Y_train, se_y_train_pred)
 
 
-#print("The model performance for training Set - Younger People -  South East ")
+#print("The model performance for training Set - Suicides -  South East ")
 #print("--------------------------------------")
 #print('RMSE is {}'.format(rmse))
 #print('R2 score is {}'.format(r2))
@@ -216,16 +219,15 @@ r2 = r2_score(se_Y_test, se_Y_test_pred)  #  R squared explained variation / tot
 #'print(se_Y_test)
 #print(lnd_Y_test_pred)
 
-#print("The model performance for testing Set - Younger People - South East ")
+#print("The model performance for testing Set - Suicides - South East ")
 #print("--------------------------------------")
 #print('RMSE is {}'.format(rmse))
 #print('R2 score is {}'.format(r2))
 #print("\n")
 
-
 # ------- SOUTH WEST   --------
 
-sw = younger_people.sw_data
+sw = suicides.sw_data
 sw = sw.drop(drop, axis=1)
 sw["Age"] = sw['Age'].str.replace(r"-","")
 sw["Age"] = sw['Age'].str.replace(r"+","")
@@ -254,7 +256,7 @@ rmse = (np.sqrt(mean_squared_error(sw_Y_train, sw_y_train_pred)))
 r2 = r2_score(sw_Y_train, sw_y_train_pred)
 
 
-#print("The model performance for training Set - Younger People -  South West ")
+#print("The model performance for training Set - Suicides -  South West ")
 #print("--------------------------------------")
 #print('RMSE is {}'.format(rmse))
 #print('R2 score is {}'.format(r2))
@@ -268,16 +270,15 @@ r2 = r2_score(sw_Y_test, sw_Y_test_pred)  #  R squared explained variation / tot
 #'print(se_Y_test)
 #print(lnd_Y_test_pred)
 
-#print("The model performance for testing Set - Younger People - South West ")
+#print("The model performance for testing Set - Suicides - South West ")
 #print("--------------------------------------")
 #print('RMSE is {}'.format(rmse))
 #print('R2 score is {}'.format(r2))
 #print("\n")
 
-
 # ------- NORTH WEST   --------
 
-nw = younger_people.nw_data
+nw = suicides.nw_data
 nw = nw.drop(drop, axis=1)
 nw["Age"] = nw['Age'].str.replace(r"-","")
 nw["Age"] = nw['Age'].str.replace(r"+","")
@@ -306,7 +307,7 @@ rmse = (np.sqrt(mean_squared_error(nw_Y_train, nw_y_train_pred)))
 r2 = r2_score(nw_Y_train, nw_y_train_pred)
 
 
-#print("The model performance for training Set - Younger People -  North West ")
+#print("The model performance for training Set - Suicides -  North West ")
 #print("--------------------------------------")
 #print('RMSE is {}'.format(rmse))
 #print('R2 score is {}'.format(r2))
@@ -320,16 +321,15 @@ r2 = r2_score(nw_Y_test, nw_Y_test_pred)  #  R squared explained variation / tot
 #'print(se_Y_test)
 #print(lnd_Y_test_pred)
 
-#print("The model performance for testing Set - Younger People - North West ")
+#print("The model performance for testing Set - Suicides - North West ")
 #print("--------------------------------------")
 #print('RMSE is {}'.format(rmse))
 #print('R2 score is {}'.format(r2))
 #print("\n")
 
-
 # ------- NORTH EAST   --------
 
-ne = younger_people.ne_data
+ne = suicides.ne_data
 ne = ne.drop(drop, axis=1)
 ne["Age"] = ne['Age'].str.replace(r"-","")
 ne["Age"] = ne['Age'].str.replace(r"+","")
@@ -358,7 +358,7 @@ rmse = (np.sqrt(mean_squared_error(ne_Y_train, ne_y_train_pred)))
 r2 = r2_score(ne_Y_train, ne_y_train_pred)
 
 
-#print("The model performance for training Set - Younger People -  North East ")
+#print("The model performance for training Set - Suicides -  North East ")
 #print("--------------------------------------")
 #print('RMSE is {}'.format(rmse))
 #print('R2 score is {}'.format(r2))
@@ -372,7 +372,7 @@ r2 = r2_score(ne_Y_test, ne_Y_test_pred)  #  R squared explained variation / tot
 #'print(se_Y_test)
 #print(lnd_Y_test_pred)
 
-#print("The model performance for testing Set - Younger People - North East ")
+#print("The model performance for testing Set - Suicides - North East ")
 #print("--------------------------------------")
 #print('RMSE is {}'.format(rmse))
 #print('R2 score is {}'.format(r2))
@@ -382,7 +382,7 @@ r2 = r2_score(ne_Y_test, ne_Y_test_pred)  #  R squared explained variation / tot
 
 # -------  EAST  OF ENGLAND  --------
 
-ee = younger_people.east_england_data
+ee = suicides.east_england_data
 ee = ee.drop(drop, axis=1)
 ee["Age"] = ee['Age'].str.replace(r"-","")
 ee["Age"] = ee['Age'].str.replace(r"+","")
@@ -411,7 +411,7 @@ rmse = (np.sqrt(mean_squared_error(ee_Y_train, ee_y_train_pred)))
 r2 = r2_score(ee_Y_train, ee_y_train_pred)
 
 
-#print("The model performance for training Set - Younger People -   East of England ")
+#print("The model performance for training Set - Suicides -   East of England ")
 #print("--------------------------------------")
 #print('RMSE is {}'.format(rmse))
 #print('R2 score is {}'.format(r2))
@@ -425,17 +425,16 @@ r2 = r2_score(ee_Y_test, ee_Y_test_pred)  #  R squared explained variation / tot
 #'print(se_Y_test)
 #print(lnd_Y_test_pred)
 
-#print("The model performance for testing Set - Younger People -  East  of England ")
+#print("The model performance for testing Set - Suicides -  East  of England ")
 #print("--------------------------------------")
 #print('RMSE is {}'.format(rmse))
 #print('R2 score is {}'.format(r2))
 #print("\n")
 
 
+# -------  EAST  OF ENGLAND  --------
 
-# -------  EAST  MIDLANDS  --------
-
-emid = younger_people.east_mid_data
+emid = suicides.east_mid_data
 emid = emid.drop(drop, axis=1)
 emid["Age"] = emid['Age'].str.replace(r"-","")
 emid["Age"] = emid['Age'].str.replace(r"+","")
@@ -464,7 +463,7 @@ rmse = (np.sqrt(mean_squared_error(emid_Y_train, emid_y_train_pred)))
 r2 = r2_score(emid_Y_train, emid_y_train_pred)
 
 
-#print("The model performance for training Set - Younger People -   East Midlands ")
+#print("The model performance for training Set - Suicides -   East Midlands ")
 #print("--------------------------------------")
 #print('RMSE is {}'.format(rmse))
 #print('R2 score is {}'.format(r2))
@@ -478,16 +477,15 @@ r2 = r2_score(emid_Y_test, emid_Y_test_pred)  #  R squared explained variation /
 #'print(se_Y_test)
 #print(lnd_Y_test_pred)
 
-#print("The model performance for testing Set - Younger People -  East Midlands ")
+#print("The model performance for testing Set - Suicides -  East Midlands ")
 #print("--------------------------------------")
 #print('RMSE is {}'.format(rmse))
 #print('R2 score is {}'.format(r2))
 #print("\n")
 
-
 # -------  YORKSHIRE  --------
 
-york = younger_people.yorkshire_data
+york = suicides.yorkshire_data
 york = york.drop(drop, axis=1)
 york["Age"] = york['Age'].str.replace(r"-","")
 york["Age"] = york['Age'].str.replace(r"+","")
@@ -516,7 +514,7 @@ rmse = (np.sqrt(mean_squared_error(york_Y_train, york_y_train_pred)))
 r2 = r2_score(york_Y_train, york_y_train_pred)
 
 
-#print("The model performance for training Set - Younger People -   Yorkshire ")
+#print("The model performance for training Set - Suicides -   Yorkshire ")
 #print("--------------------------------------")
 #print('RMSE is {}'.format(rmse))
 #print('R2 score is {}'.format(r2))
@@ -530,7 +528,7 @@ r2 = r2_score(york_Y_test, york_Y_test_pred)  #  R squared explained variation /
 #'print(se_Y_test)
 #print(lnd_Y_test_pred)
 
-#print("The model performance for testing Set - Younger People -  Yorkshire ")
+#print("The model performance for testing Set - Suicides -  Yorkshire ")
 #print("--------------------------------------")
 #print('RMSE is {}'.format(rmse))
 #print('R2 score is {}'.format(r2))

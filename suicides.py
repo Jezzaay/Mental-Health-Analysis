@@ -147,8 +147,8 @@ all1517 = all1517.groupby([ "AreaName", "IndicatorFigures"]).size().reset_index(
 all1517.columns =  ["AreaName" ,"Figure_Amount", "IndicatorFigures"]
 
 #England With London
-england = all_data.groupby(["IndicatorName", "Timeperiod", "ParentName"]).size().reset_index()
-england.columns = ["IndicatorName", "Year", "Region", "IndicatorFigures"]
+england = all_data.groupby(["IndicatorName", "Age", "Timeperiod", "ParentName"]).size().reset_index()
+england.columns = ["IndicatorName", "Age",  "Year", "Region", "IndicatorFigures"]
 
 #England WO London
 eng_wo_london = [east_mid, east_england, north_east, north_west,
@@ -156,8 +156,8 @@ eng_wo_london = [east_mid, east_england, north_east, north_west,
 england_wo_london = pd.concat(eng_wo_london)
 england_wo_london = england_wo_london[england_wo_london.AreaName != "England"]
 england_wo_london = england_wo_london[england_wo_london.ParentName != "England"]
-england_wo_london = england_wo_london.groupby(["IndicatorName", "Timeperiod", "ParentName"]).size().reset_index()
-england_wo_london.columns = ["IndicatorName", "Year", "Region", "IndicatorFigures"]
+england_wo_london = england_wo_london.groupby(["IndicatorName", "Age",  "Timeperiod", "ParentName" ]).size().reset_index()
+england_wo_london.columns = ["IndicatorName", "Age",  "Year", "Region", "IndicatorFigures"]
 
 # England Region Count
 england_reg = all_data.groupby(["ParentName", "Timeperiod"]).size().reset_index()
