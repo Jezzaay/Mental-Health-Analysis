@@ -187,6 +187,13 @@ all.columns = ["Year", "Sex", "AreaName", "IndicatorFigures"]
 #all1718.columns =  ["AreaName" ,"Figure_Amount", "IndicatorFigures"]
 
 
+# Islington & Sunderland
+islsund =  [london, north_east]
+islsund = pd.concat(islsund)
+islsund = islsund[islsund.AreaName.str.contains("Islington") | islsund.AreaName.str.contains("Sunderland")]
+islsund = islsund.groupby(["IndicatorName", "Age",  "Sex", "ParentName",  "AreaName" ]).size().reset_index()
+islsund.columns = ["IndicatorName", "Age",  "Sex", "Region", "AreaName", "IndicatorFigures"]
+
 #England With London
 england = all_data.groupby(["IndicatorName", "Age", "Timeperiod", "ParentName"]).size().reset_index()
 england.columns = ["IndicatorName", "Age", "Year", "Region", "IndicatorFigures"]
@@ -270,6 +277,41 @@ west_mid_data.columns =  ["IndicatorName", "Sex", "Age",  "AreaName", "Indicator
 yorkshire = yorkshire[yorkshire!= "England"]
 yorkshire_data = yorkshire.groupby(["IndicatorName", "Sex", "Age", "AreaName"]).size().reset_index()
 yorkshire_data.columns =  ["IndicatorName", "Sex", "Age",  "AreaName", "IndicatorFigures"]
+
+#grouped islington sunderland
+grpislsund = go.Figure()
+Ages = ["5-16 yrs", "10-14 yrs", "20-24 yrs", "10-24 yrs", "16+ yrs"]
+
+grpislsund.layout.update(
+    title="Islington x Sunderland"
+)
+
+
+grpislsund.add_trace(go.Bar(
+    x = Ages,
+    y = [4,1,0,1,2],
+    name =  "Sunderland"
+))
+
+grpislsund.add_trace(go.Bar(
+    x = Ages,
+    y = [18, 7,7,0,2],
+    name =  "Islington"
+))
+
+
+#nested pie
+islsundpie =[ go.Pie(values=islsund["IndicatorFigures"],
+                    labels=islsund["Age"],
+                    hole = 0.5,
+                    direction = 'clockwise',
+                    ),
+            go.Pie(values=islsund["IndicatorFigures"],
+                   labels=islsund["AreaName"],
+                   hole=0.9,
+                   direction = 'clockwise',
+)
+              ]
 
 
 
@@ -446,6 +488,45 @@ dcc.Graph(
     ]),
 
     html.Details([
+        html.Summary("Comparison of Islington and Sunderland"),
+        html.H1("Islington & Sunderland"),
+        html.Br(),
+        dash_table.DataTable(
+            id="islsund_table",
+            columns=[{'id': c, 'name': c} for c in islsund.columns],
+            data=islsund.to_dict('records'),
+            filtering=True,
+            sorting=True,
+            sorting_type="single",
+            pagination_settings={
+                "current_page": 0,
+                "page_size": 5,
+            },
+            style_table={'overflowX': 'scroll'},
+            style_cell={
+                # all three widths are needed
+                'minWidth': '180px', 'width': '180px', 'maxWidth': '180px',
+                'whiteSpace': 'normal'
+            },
+            css=[{
+                'selector': '.dash-cell div.dash-cell-value',
+                'rule': 'display: inline; white-space: inherit; overflow: inherit; text-overflow: inherit;'
+            }],
+        ),
+
+dcc.Graph(
+            figure=go.Figure(data= grpislsund)
+        ),
+
+
+dcc.Graph(
+            figure=go.Figure(data=islsundpie, layout={'title': 'Nested Islington x Sunderland Pie'})
+        ),
+
+
+    ]),
+
+    html.Details([
         html.Summary("East Midlands Details"),
         html.Br(),
         html.H1("East Midlands Data"),
@@ -504,7 +585,7 @@ dcc.Graph(
                       'data': [go.Pie(labels=east_mid_data["Age"],
                                       values=east_mid_data["IndicatorFigures"],
                                       marker=dict(line=dict(color='#fff', width=1)),
-                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      hoverinfo='label+ value+percent', textinfo='value + percent',
                                       domain={'x': [0, .75], 'y': [0, 1]}
                                       )
                                ],
@@ -572,7 +653,7 @@ dcc.Graph(
                       'data': [go.Pie(labels=east_england_data["Age"],
                                       values=east_england_data["IndicatorFigures"],
                                       marker=dict(line=dict(color='#fff', width=1)),
-                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      hoverinfo='label+ value+percent', textinfo='value + percent',
                                       domain={'x': [0, .75], 'y': [0, 1]}
                                       )
                                ],
@@ -646,7 +727,7 @@ dcc.Graph(
                       'data': [go.Pie(labels=london_data["Age"],
                                       values=london_data["IndicatorFigures"],
                                       marker=dict(line=dict(color='#fff', width=1)),
-                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      hoverinfo='label+ value+percent', textinfo='value + percent',
                                       domain={'x': [0, .75], 'y': [0, 1]}
                                       )
                                ],
@@ -715,7 +796,7 @@ dcc.Graph(
                       'data': [go.Pie(labels=ne_data["Age"],
                                       values=ne_data["IndicatorFigures"],
                                       marker=dict(line=dict(color='#fff', width=1)),
-                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      hoverinfo='label+ value+percent', textinfo='value + percent',
                                       domain={'x': [0, .75], 'y': [0, 1]}
                                       )
                                ],
@@ -781,7 +862,7 @@ dcc.Graph(
                       'data': [go.Pie(labels=nw_data["Age"],
                                       values=nw_data["IndicatorFigures"],
                                       marker=dict(line=dict(color='#fff', width=1)),
-                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      hoverinfo='label+ value+percent', textinfo='value + percent',
                                       domain={'x': [0, .75], 'y': [0, 1]}
                                       )
                                ],
@@ -850,7 +931,7 @@ dcc.Graph(
                       'data': [go.Pie(labels=se_data["Age"],
                                       values=se_data["IndicatorFigures"],
                                       marker=dict(line=dict(color='#fff', width=1)),
-                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      hoverinfo='label+ value+percent', textinfo='value + percent',
                                       domain={'x': [0, .75], 'y': [0, 1]}
                                       )
                                ],
@@ -915,7 +996,7 @@ dcc.Graph(
                       'data': [go.Pie(labels=sw_data["Age"],
                                       values=sw_data["IndicatorFigures"],
                                       marker=dict(line=dict(color='#fff', width=1)),
-                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      hoverinfo='label+ value+percent', textinfo='value + percent',
                                       domain={'x': [0, .75], 'y': [0, 1]}
                                       )
                                ],
@@ -981,7 +1062,7 @@ dcc.Graph(
                       'data': [go.Pie(labels=west_mid_data["Age"],
                                       values=west_mid_data["IndicatorFigures"],
                                       marker=dict(line=dict(color='#fff', width=1)),
-                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      hoverinfo='label+ value+percent', textinfo='value + percent',
                                       domain={'x': [0, .75], 'y': [0, 1]}
                                       )
                                ],
@@ -1045,7 +1126,7 @@ dcc.Graph(
                       'data': [go.Pie(labels=yorkshire_data["Age"],
                                       values=yorkshire_data["IndicatorFigures"],
                                       marker=dict(line=dict(color='#fff', width=1)),
-                                      hoverinfo='label+ value+percent', textinfo='value',
+                                      hoverinfo='label+ value+percent', textinfo='value + percent',
                                       domain={'x': [0, .75], 'y': [0, 1]}
                                       )
                                ],

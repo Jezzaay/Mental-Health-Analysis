@@ -15,7 +15,22 @@ home_layout = html.Div([
 
 
 
-        html.P("Analysis on Younger people and Suicides with economical data"),
+        html.P("Analysis on Younger people and Suicides with gross disposable household income (GDHI)"
+               " and house prices."),
+
+        html.Br(),
+
+        html.P("Gross disposable household income should be the amount of money that individuals have available f"
+               "or spending after tax has been taken off.  "),
+
+        html.Br(),
+
+        html.P("House prices are the average across the selected areas which will be showed."
+               "I have attempted to accurately only show areas which the datasets overlap with both house prices "
+               "and GDHI"),
+
+
+
 
         html.Div(id='home-content'),
 
