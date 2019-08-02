@@ -283,7 +283,7 @@ grpislsund = go.Figure()
 Ages = ["5-16 yrs", "10-14 yrs", "20-24 yrs", "10-24 yrs", "16+ yrs"]
 
 grpislsund.layout.update(
-    title="Islington x Sunderland"
+    title="Islington x Sunderland Younger People"
 )
 
 
@@ -520,7 +520,7 @@ dcc.Graph(
 
 
 dcc.Graph(
-            figure=go.Figure(data=islsundpie, layout={'title': 'Nested Islington x Sunderland Pie'})
+            figure=go.Figure(data=islsundpie, layout={'title': 'Islington x Sunderland Younger People'})
         ),
 
 
