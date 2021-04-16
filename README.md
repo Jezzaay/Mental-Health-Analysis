@@ -5,5 +5,3 @@ This was for my master's research project. Where I used Public Health England da
 All work has been part of my Master's Project in 2019 for my Master's Data Science. 
 
 
-# License
-MIT License. 
